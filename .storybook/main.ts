@@ -13,5 +13,9 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ["../public"],
+  core: {
+    builder: "@storybook/builder-webpack5", // Đảm bảo sử dụng builder đúng cho Next.js
+  },
 };
+
 export default config;
