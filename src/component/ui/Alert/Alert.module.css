@@ -1,0 +1,214 @@
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 640px;
+  min-height: 42px;
+  padding: 5px 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+}
+.alert .alert-option {
+  font-weight: 500;
+  cursor: pointer;
+}
+.alert-type--success {
+  background-color: rgba(246, 251, 246, 1);
+  border-color: rgba(76, 175, 80, 1);
+}
+.alert-type--error {
+  background-color: rgba(254, 246, 245, 1);
+  border-color: rgba(244, 67, 54, 1);
+}
+.alert-type--info {
+  background-color: rgba(244, 250, 254, 1);
+  border-color: rgba(33, 150, 243, 1);
+}
+.alert-icon--success {
+  color: rgba(76, 175, 80, 1) !important;
+}
+.alert-icon--error {
+  color: rgba(244, 67, 54, 1) !important;
+}
+.alert-icon--info {
+  color: rgba(33, 150, 243, 1) !important;
+}
+.alert-icon--hover:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.alert-snackbar {
+  position: fixed;
+  top: -120px;
+  z-index: 1000;
+  margin: 0 auto;
+  box-shadow: 0 0 7px 0.1px rgba(128, 128, 128, 0.144);
+}
+.alert-snackbar--open {
+  animation-name: alert-snackbar--open;
+  animation-duration: 5s;
+}
+@keyframes alert-snackbar--open {
+  0% {
+    top: -120px;
+  }
+  10% {
+    top: 35px;
+  }
+  90% {
+    top: 35px;
+  }
+  100% {
+    top: -120px;
+  }
+}
+.util-flex {
+  display: flex;
+}
+.util-flex--align-center {
+  align-items: center;
+}
+.util-flex--gap8 {
+  gap: 8px;
+}
+.util-flex--justify-end {
+  justify-content: flex-end;
+}
+.util-flex--justify-center {
+  justify-content: center;
+}
+.alertConfirmContainer {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 10000000000;
+  background-color: rgba(128, 128, 128, 0.267);
+}
+.alertConfirmContainer .alertConfirm {
+  width: 100%;
+  max-width: 450px;
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border-radius: 10px;
+  padding: 20px 10px 5px 10px;
+}
+.alertConfirmContainer .alertConfirm .alertConfirmContent {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.alertConfirmContainer
+  .alertConfirm
+  .alertConfirmContent
+  .alertConfirmContentSvg {
+  width: 100%;
+  max-width: 70px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  padding: 3px;
+}
+.alertConfirmContainer
+  .alertConfirm
+  .alertConfirmContent
+  .alertConfirmContentText {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+.alertConfirmContainer .alertConfirm .alertConfirmButton {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.alertConfirmContainer
+  .alertConfirm
+  .alertConfirmButton
+  .alertConfirmButtonStyle {
+  color: white !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  min-width: 80px;
+  font-family: "Archivo Narrow";
+  height: 36px;
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 0px 10px;
+  cursor: pointer;
+}
+.alertConfirmContainer .alertConfirm .alertConfirmButton .primary {
+  background: #1880ff !important;
+  border: 2px solid #1880ff !important;
+}
+.alertConfirmContainer .alertConfirm .alertConfirmButton .primary:hover {
+  color: white !important;
+  background: #1880ff !important;
+}
+.alertConfirmContainer .alertConfirm .alertConfirmButton .danger {
+  background: #ff4747 !important;
+  border: 2px solid #ff4747 !important;
+  opacity: 0.7;
+}
+.alertConfirmContainer .alertConfirm .alertConfirmButton .danger:hover {
+  color: white !important;
+  background: #ff4747 !important;
+}
+.__alert {
+  width: 100vw;
+  min-height: 0px;
+  z-index: 100000000;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.__alert .__alertContainer {
+  width: 250px;
+  min-height: 60px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-right: -500px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.233);
+  animation-name: dichuyen;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: 400;
+}
+.__alert .__alertTitle {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+@keyframes dichuyen {
+  0% {
+    margin-right: -500px;
+  }
+  100% {
+    margin-right: 10px;
+  }
+}

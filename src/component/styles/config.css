@@ -1,0 +1,422 @@
+/* LIGHT */
+
+.UI-2ANI-backgroundColor--light {
+  background-color: white;
+}
+
+.UI-2ANI-textColor--light {
+  color: black;
+}
+
+.UI-2ANI-skeleton--light {
+  animation: pulse 700ms infinite alternate;
+  display: inline-block;
+}
+
+@keyframes pulse {
+  from {
+    background-color: #dddddd81;
+  }
+  to {
+    background-color: #eeeeee6b;
+  }
+}
+
+.UI-2ANI-bodyBackgroundColor--light {
+  background-color: rgb(240 242 245 / 67%);
+}
+
+/* DARK */
+
+.UI-2ANI-backgroundColor--dark {
+  background-color: rgb(36, 37, 38);
+}
+
+.UI-2ANI-textColor--dark {
+  color: white;
+}
+
+.UI-2ANI-skeleton--dark {
+  animation: pulse-black 700ms infinite alternate;
+  display: inline-block;
+}
+@keyframes pulse-black {
+  from {
+    background-color: #2b2b2b;
+  }
+  to {
+    background-color: #1b1b1b;
+  }
+}
+.UI-2ANI-bodyBackgroundColor--dark {
+  background-color: rgb(21, 21, 21);
+}
+
+/* SIZE */
+
+.UI-2ANI-lg {
+  max-width: 960px;
+}
+.UI-2ANI-auto {
+  max-width: 80%;
+}
+.UI-2ANI-fw {
+  max-width: calc(100% - 20px);
+}
+.UI-2ANI-md {
+  max-width: 760px;
+}
+.UI-2ANI-sm {
+  max-width: 500px;
+}
+.UI-2ANI-xs {
+  max-width: 360px;
+}
+
+/* GRADIENT TEXT */
+.UI-2ANI-text-green-gradient {
+  background: linear-gradient(
+    42deg,
+    rgba(178, 255, 181, 1) 0%,
+    rgba(50, 255, 56, 1) 54%,
+    rgba(155, 255, 163, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.UI-2ANI-text-violet-gradient {
+  color: rgb(255, 178, 235);
+  background: linear-gradient(
+    42deg,
+    rgba(255, 178, 235, 1) 0%,
+    rgba(255, 50, 223, 1) 50%,
+    rgba(255, 210, 251, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.UI-2ANI-text-blue-gradient {
+  background: linear-gradient(
+    42deg,
+    rgba(40, 223, 223, 1) 0%,
+    rgba(50, 127, 255, 1) 50%,
+    rgba(67, 209, 245, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.UI-2ANI-text-tomato-gradient {
+  color: rgb(255, 154, 137);
+  background: linear-gradient(
+    42deg,
+    rgba(255, 154, 137, 1) 0%,
+    rgba(255, 50, 50, 1) 50%,
+    rgba(251, 156, 152, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.UI-2ANI-text-yellow-gradient {
+  color: rgb(255, 255, 137);
+  background: linear-gradient(
+    42deg,
+    rgba(255, 255, 137, 1) 0%,
+    rgba(247, 255, 50, 1) 50%,
+    rgba(251, 238, 152, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.UI-2ANI-text-orange-gradient {
+  color: rgb(255, 255, 137);
+  background: linear-gradient(
+    42deg,
+    rgba(255, 255, 137, 1) 0%,
+    rgba(255, 146, 50, 1) 50%,
+    rgba(251, 238, 152, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* GRADIENT BACKGROUND */
+.UI-2ANI-green-gradient {
+  background: rgb(50, 255, 56);
+  background: linear-gradient(
+    42deg,
+    rgba(178, 255, 181, 1) 0%,
+    rgba(50, 255, 56, 1) 54%,
+    rgba(155, 255, 163, 1) 100%
+  );
+}
+
+.UI-2ANI-violet-gradient {
+  background: rgb(255, 178, 235);
+  background: linear-gradient(
+    42deg,
+    rgba(255, 178, 235, 1) 0%,
+    rgba(255, 50, 223, 1) 50%,
+    rgba(255, 210, 251, 1) 100%
+  );
+}
+
+.UI-2ANI-blue-gradient {
+  background: rgb(40, 223, 223);
+  background: linear-gradient(
+    42deg,
+    rgba(40, 223, 223, 0.8) 0%,
+    rgba(50, 127, 255, 0.8) 50%,
+    rgba(67, 209, 245, 0.8) 100%
+  );
+}
+
+.UI-2ANI-blue-gradient-hover:hover {
+  color: white;
+  background: rgb(40, 223, 223);
+  background: linear-gradient(
+    42deg,
+    rgba(40, 223, 223, 1) 0%,
+    rgba(50, 127, 255, 1) 50%,
+    rgba(67, 209, 245, 1) 100%
+  );
+}
+
+.UI-2ANI-tomato-gradient {
+  background: rgb(255, 154, 137);
+  background: linear-gradient(
+    42deg,
+    rgba(255, 154, 137, 1) 0%,
+    rgba(255, 50, 50, 1) 50%,
+    rgba(251, 156, 152, 1) 100%
+  );
+}
+
+.UI-2ANI-yellow-gradient {
+  background: rgb(255, 255, 137);
+  background: linear-gradient(
+    42deg,
+    rgba(255, 255, 137, 1) 0%,
+    rgba(247, 255, 50, 1) 50%,
+    rgba(251, 238, 152, 1) 100%
+  );
+}
+
+.UI-2ANI-orange-gradient {
+  background: rgb(255, 255, 137);
+  background: linear-gradient(
+    42deg,
+    rgba(255, 255, 137, 1) 0%,
+    rgba(255, 146, 50, 1) 50%,
+    rgba(251, 238, 152, 1) 100%
+  );
+}
+
+/* BACKGROUND COLOR */
+.UI-2ANI-primary {
+  background-color: #2196f3;
+  color: white;
+}
+
+.UI-2ANI-secondary {
+  background-color: rgb(255, 55, 55);
+  color: white;
+}
+
+.UI-2ANI-info {
+  background-color: rgb(41, 138, 138);
+  color: white;
+}
+
+.UI-2ANI-warning {
+  background-color: rgb(255, 136, 0);
+  color: white;
+}
+
+.UI-2ANI-violet {
+  background-color: blueviolet;
+  color: white;
+}
+
+.UI-2ANI-sunny {
+  background-color: rgb(214, 214, 26);
+  color: white;
+}
+
+.UI-2ANI-pink {
+  background-color: pink;
+}
+
+.UI-2ANI-default {
+  background-color: #8080802b;
+}
+
+.UI-2ANI-black {
+  background-color: rgb(5, 5, 5);
+  color: white;
+}
+
+.UI-2ANI-white {
+  background-color: white;
+}
+
+/* BACKGROUND COLOR HOVER */
+.UI-2ANI-primary-hover:hover {
+  background-color: #0070cc;
+  color: white;
+}
+
+.UI-2ANI-secondary-hover:hover {
+  background-color: rgb(255, 65, 65);
+  color: white;
+}
+
+.UI-2ANI-info-hover:hover {
+  background-color: rgb(15, 110, 110);
+  color: white;
+}
+
+.UI-2ANI-warning-hover:hover {
+  background-color: rgb(207, 112, 4);
+  color: white;
+}
+
+.UI-2ANI-violet-hover:hover {
+  background-color: rgb(122, 16, 221);
+  color: white;
+}
+
+.UI-2ANI-sunny-hover:hover {
+  background-color: rgb(245, 245, 4);
+  color: white;
+}
+
+.UI-2ANI-pink-hover:hover {
+  background-color: rgb(255, 148, 166);
+}
+
+.UI-2ANI-default-hover:hover {
+  background-color: #80808048;
+}
+
+.UI-2ANI-black-hover:hover {
+  background-color: rgba(5, 5, 5, 0.74);
+  color: white;
+}
+
+.UI-2ANI-white-hover:hover {
+  background-color: rgba(255, 255, 255, 0.788);
+}
+
+/* TEXT COLOR */
+
+.UI-2ANI-text-black {
+  color: rgb(5, 5, 5) !important;
+  fill: rgb(5, 5, 5) !important;
+}
+
+.UI-2ANI-text-white {
+  color: white !important;
+  fill: white !important;
+}
+
+.UI-2ANI-text-primary {
+  color: #2196f3 !important;
+  fill: #2196f3 !important;
+}
+
+.UI-2ANI-text-secondary {
+  color: rgb(255, 55, 55) !important;
+  fill: rgb(255, 55, 55) !important;
+}
+
+.UI-2ANI-text-info {
+  color: rgb(41, 138, 138) !important;
+  fill: rgb(41, 138, 138) !important;
+}
+
+.UI-2ANI-text-warning {
+  color: rgb(255, 136, 0) !important;
+  fill: rgb(255, 136, 0) !important;
+}
+
+.UI-2ANI-text-violet {
+  color: blueviolet !important;
+  fill: blueviolet !important;
+}
+
+.UI-2ANI-text-sunny {
+  color: rgb(214, 214, 26) !important;
+  fill: rgb(214, 214, 26) !important;
+}
+
+.UI-2ANI-text-pink {
+  color: pink !important;
+  fill: pink !important;
+}
+
+.UI-2ANI-text-default {
+  color: rgb(134, 134, 134) !important;
+  fill: rgb(134, 134, 134) !important;
+}
+
+.UI-2ANI-border-primary {
+  border-color: #2196f3;
+}
+
+.UI-2ANI-border-secondary {
+  border-color: rgb(255, 55, 55);
+}
+
+.UI-2ANI-border-nfo {
+  border-color: rgb(41, 138, 138);
+}
+
+.UI-2ANI-border-warning {
+  border-color: rgb(255, 136, 0);
+}
+
+.UI-2ANI-border-violet {
+  border-color: blueviolet;
+}
+
+.UI-2ANI-border-sunny {
+  border-color: rgb(214, 214, 26);
+}
+
+.UI-2ANI-border-pink {
+  border-color: pink;
+}
+
+.UI-2ANI-border-default {
+  border-color: grey;
+}
+
+.UI-2ANI-border-black {
+  border-color: rgb(5, 5, 5);
+}
+
+.UI-2ANI-border-white {
+  border-color: white;
+}
+
+/* Css no copy */
+.UI-2ANI-css-no-copy {
+  -moz-user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}

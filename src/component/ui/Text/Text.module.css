@@ -1,0 +1,141 @@
+/* cursor */
+.cursor-copy {
+  cursor: copy;
+}
+.cursor-default {
+  cursor: default;
+}
+.cursor-move {
+  cursor: move;
+}
+.cursor-no-drop {
+  cursor: no-drop;
+}
+.cursor-text {
+  cursor: text;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* decoration */
+.decoration-none:hover {
+  text-decoration: none;
+}
+.decoration-through:hover {
+  text-decoration: line-through;
+}
+.decoration-overline:hover {
+  text-decoration: overline;
+}
+.decoration-underline:hover {
+  text-decoration: underline;
+}
+.decoration-wavy:hover {
+  text-decoration: wavy;
+}
+.decoration-solid:hover {
+  text-decoration: solid;
+}
+.decoration-link:hover {
+  text-decoration: underline !important;
+}
+/* Size */
+
+.h1 {
+  font-size: 2.5rem;
+}
+
+.h2 {
+  font-size: 2rem;
+}
+
+.h3 {
+  font-size: 1.75rem;
+}
+
+.h4 {
+  font-size: 1.5rem;
+}
+
+.h5 {
+  font-size: 1.25rem;
+}
+
+.h6 {
+  font-size: 1rem;
+}
+
+.p {
+  font-size: 1rem;
+}
+
+/* Overflow */
+
+.overflow-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+  white-space: nowrap;
+}
+
+/* font weight */
+
+.weight-bold {
+  font-weight: bold;
+}
+.weight-italic {
+  font-weight: italic;
+}
+.weight-normal {
+  font-weight: normal;
+}
+.weight-400 {
+  font-weight: 400;
+}
+.weight-500 {
+  font-weight: 500;
+}
+.weight-600 {
+  font-weight: 600;
+}
+.weight-700 {
+  font-weight: 700;
+}
+.weight-800 {
+  font-weight: 800;
+}
+.weight-900 {
+  font-weight: 900;
+}
+
+/* Align */
+.text-align--auto {
+  text-align: start;
+}
+
+.text-align--center {
+  text-align: center;
+}
+.text-align--right {
+  text-align: right;
+}
+
+/* font style */
+.format-italic {
+  font-style: italic;
+}
+.format-normal {
+  font-style: normal;
+}
+.format-inherit {
+  font-style: inherit;
+}
+.format-initial {
+  font-style: initial;
+}
+
+/* Hover */
+.hover:hover {
+  opacity: 0.8;
+}

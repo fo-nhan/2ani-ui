@@ -1,0 +1,13 @@
+.App {
+  max-width: 1200px;
+  padding: 40px 15px;
+  margin: 0 auto;
+}
+
+.layout {
+  width: 100%;
+  padding: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

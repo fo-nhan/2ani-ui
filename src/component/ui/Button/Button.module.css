@@ -1,0 +1,31 @@
+.myButton {
+  border: none;
+  padding: 5px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.auto {
+  height: 36px;
+}
+
+.fw {
+  height: 40px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.big {
+  height: 44px;
+  font-size: 1.25rem;
+}
+
+.small {
+  height: 32px;
+  font-size: 14px;
+}
