@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import styles from "./Tooltip.module.css";
 import { renderToString } from "react-dom/server";
-import { useRouter } from "next/router";
 import useHover from "../../hooks/useHover";
 import useScroll from "../../hooks/useScroll";
 import { SizeOfElement } from "../../utils/fs";
@@ -33,7 +32,6 @@ const Tooltip = ({
   const refHover = useRef<any>();
   const hover = useHover(ref);
   const scroll = useScroll();
-  const route = useRouter();
 
   useEffect(() => {
     if (ref.current && hover) {
@@ -80,7 +78,7 @@ const Tooltip = ({
         ele.innerHTML = "";
       }
     }
-  }, [classer, hover, noReponsive, route]);
+  }, [classer, hover, noReponsive]);
 
   return (
     <span
