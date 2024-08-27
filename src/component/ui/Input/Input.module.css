@@ -1,0 +1,90 @@
+.no-boxShadow {
+  box-shadow: none;
+}
+.parent {
+  position: relative;
+}
+
+.parent input {
+  width: 100%;
+  border: 0.1px solid rgba(128, 128, 128, 0.151);
+  display: flex;
+  outline: none;
+  min-height: 24px;
+  border-radius: 5px;
+}
+
+.parent input:focus {
+  box-shadow: 0px 0px 9px 0.1px rgba(128, 128, 128, 0.185);
+}
+
+.parent input::placeholder {
+  color: rgba(128, 128, 128, 0.562);
+}
+
+.parent textarea::placeholder {
+  color: rgba(128, 128, 128, 0.562);
+}
+
+.icon {
+  position: absolute;
+  height: 100%;
+  width: 48px;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pass {
+  position: absolute;
+  height: 100%;
+  width: 48px;
+  top: 0px;
+  right: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.unit {
+  position: absolute;
+  height: 100%;
+  width: 48px;
+  top: 0px;
+  right: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container[type="button"] {
+  cursor: pointer;
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  resize: none;
+  font-size: 1rem;
+}
+.textArea {
+  width: 100%;
+  border: 0.1px solid rgba(128, 128, 128, 0.151);
+  padding: 10px 10px;
+  display: flex;
+  outline: none;
+  min-height: 40px;
+  border-radius: 12px;
+}
+.textArea:focus {
+  box-shadow: 0px 0px 9px 0.1px rgba(128, 128, 128, 0.185);
+}
+.textArea::-webkit-scrollbar {
+  width: 4px;
+}
+.textArea::-webkit-scrollbar-thumb {
+  background-color: rgba(42, 170, 255, 0.404);
+  border-radius: 4px;
+}

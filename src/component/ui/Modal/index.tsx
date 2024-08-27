@@ -39,7 +39,9 @@ function Modal({
   const { theme } = useAniState();
 
   React.useEffect(() => {
-    onClose?.(isDetect, ref?.current || undefined);
+    if(isOpen){
+      onClose?.(false, ref?.current || undefined);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDetect]);
 

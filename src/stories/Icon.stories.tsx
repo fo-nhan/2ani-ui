@@ -30,7 +30,7 @@ export const AllIcons = () => (
   >
     {Object.keys(arrayIcon).map((iconName) => (
       <div key={iconName} style={{ textAlign: "center" }}>
-        <Icon type={iconName as IconTypeMap} size={48} />
+        <Icon type={iconName as IconTypeMap} size={16} />
         <div>{iconName}</div>
       </div>
     ))}

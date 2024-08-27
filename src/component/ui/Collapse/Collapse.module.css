@@ -1,0 +1,53 @@
+.collapseContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-shadow: 0px 0px 3px 0.1px rgba(128, 128, 128, 0.199);
+  border-radius: 5px;
+}
+
+.collapseButton {
+  min-height: 40px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background-color: rgba(128, 128, 128, 0.062);
+  height: 100%;
+  min-height: 40px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.titleClose{
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.icon {
+  width: 100%;
+  max-width: 40px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collapseContent {
+  overflow: hidden;
+  transition: height 1.5s ease;
+}
+
+.close {
+  height: 0px;
+}
+
+.open {
+  height: auto;
+  padding: 10px;
+}
