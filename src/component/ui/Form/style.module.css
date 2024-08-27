@@ -1,0 +1,13 @@
+.require input {
+     
+        border: 1px solid red !important;
+    
+}
+
+.item{
+    padding: 0px 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow-y: hidden;
+}

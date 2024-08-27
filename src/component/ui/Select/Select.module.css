@@ -1,0 +1,83 @@
+.select {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 0.1px solid rgba(128, 128, 128, 0.151);
+  border-radius: 5px;
+  padding: 0px 0px 0px 10px;
+  z-index: 1;
+  cursor: pointer;
+  justify-content: center;
+}
+.select .selectedValue {
+  width: calc(100% - 40px);
+  height: 100%;
+}
+.select .selectedValue .span {
+  color: rgba(128, 128, 128, 0.562);
+  font-weight: 500;
+}
+.select .selectedValue .input {
+  padding: 0px;
+  box-shadow: none;
+  min-height: 24px;
+  border: none;
+  font-size: 1rem;
+  border-radius: 0px;
+}
+.select .optionBox {
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  min-height: 24px;
+  border-radius: 5px;
+  max-height: 65vh;
+  overflow-y: auto;
+  display: none;
+  z-index: 1;
+  box-shadow: 0px 0px 4px 1px rgba(128, 128, 128, 0.123);
+}
+.select .optionBox::-webkit-scrollbar {
+  width: 3px;
+}
+.select .optionBox .none {
+  display: none !important;
+}
+.select .optionBox .option {
+  min-height: 24px;
+  padding: 8px 5px 8px 10px;
+  cursor: pointer;
+}
+.select .optionBox .option:hover {
+  background-color: rgba(128, 128, 128, 0.096);
+}
+.select .optionBox .option:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.select .optionBox .option:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.select .optionBox .selected {
+  background-color: rgba(128, 128, 128, 0.24);
+}
+.select .optinonBoxOpen {
+  display: block;
+}
+.select .optinonBoxClose {
+  display: none;
+}
+.select .optionBoxIcon {
+  position: absolute;
+  right: 0px;
+  height: calc(100% - 16px);
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.disabled {
+  cursor: no-drop;
+  opacity: 0.5;
+}

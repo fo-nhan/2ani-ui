@@ -24,7 +24,7 @@ export type TextProps = {
     | "solid"
     | "link"
     | "auto";
-  size?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "auto";
+  size?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7" | "p" | "auto";
   overflow?: "auto" | "ellipsis";
   align?: "auto" | "center" | "right";
   weight?:

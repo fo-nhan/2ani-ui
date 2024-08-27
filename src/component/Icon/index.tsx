@@ -13,8 +13,8 @@ const Icon = ({ type, size = 0, color = "", ...other }: IconTypeProps) => {
           ...other,
           key: i,
           style: {
-            height: size ? `${size}px` : "1.5rem",
-            width: size ? `${size}px` : "1.5rem",
+            height: size ? `${size}px` : "1rem",
+            width: size ? `${size}px` : "1rem",
           },
           fill: `${
             color

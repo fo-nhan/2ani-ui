@@ -12,6 +12,8 @@ export type StateThemeProps = {
   boxShadowClass?: string;
   bodyBackgroundColor?: string;
   bodyBackgroundColorClass?: string;
+  fontFamily?: string;
+  fontFamilyClass?: string;
   [key: string]: any;
 };
 
@@ -53,6 +55,8 @@ function UI2aniContext({
       skeletonClass: "UI-2ANI-skeleton--light",
       bodyBackgroundColor: "rgb(240 242 245 / 67%)",
       bodyBackgroundColorClass: "UI-2ANI-bodyBackgroundColor--light",
+      fontFamily: `"Segoe UI", "San Francisco", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif`,
+      fontFamilyClass: "UI-2ANI-font",
       ...configLightTheme,
     },
     dark: {
@@ -64,6 +68,8 @@ function UI2aniContext({
       skeletonClass: "UI-2ANI-skeleton--dark",
       bodyBackgroundColor: "rgb(21, 21, 21)",
       bodyBackgroundColorClass: "UI-2ANI-bodyBackgroundColor--dark",
+      fontFamily: `"Segoe UI", "San Francisco", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif`,
+      fontFamilyClass: "UI-2ANI-font",
       ...configDarkTheme,
     },
   } as const;
@@ -77,7 +83,7 @@ function UI2aniContext({
         width: "100vw",
         ...style,
       }}
-      className={`${theme.bodyBackgroundColorClass} ${theme.textColorClass}`}
+      className={`${theme.bodyBackgroundColorClass} ${theme.textColorClass} ${theme.fontFamilyClass}`}
       id="root-ui"
     >
       <reState.Provider
@@ -87,6 +93,7 @@ function UI2aniContext({
       </reState.Provider>
       <div id="__alert"></div>
       <div id="__modal"></div>
+      <div id="__tooltip"></div>
       <div
         id="__menu_color"
         style={{
