@@ -5,7 +5,7 @@ import { returnStyle } from "../../utils/style";
 type TypeProps = {
   size?: number;
   defaultChecked?: boolean;
-  onChange?: (arg: any) => void;
+  onChange?: (swit: boolean) => void;
 };
 
 const Switch = ({

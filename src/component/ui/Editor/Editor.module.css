@@ -1,0 +1,40 @@
+.container {
+  width: 100%;
+  height: auto;
+  position: relative;
+  /* line-height: 20px; */
+  font-size: 1rem;
+  font-weight: 400;
+}
+.editor {
+  width: 100%;
+  resize: none;
+  position: relative;
+  tab-size: 1;
+  outline: 0;
+  padding: 15px 10px;
+  caret-color: #444;
+  font-size: 1rem;
+}
+
+/*  */
+.editor-placeholder {
+  color: #999;
+  overflow: hidden;
+  position: absolute;
+  text-overflow: ellipsis;
+  top: 15px;
+  left: 10px;
+  font-size: 1rem;
+  font-weight: 400;
+  user-select: none;
+  display: inline-block;
+  pointer-events: none;
+}
+
+.charCount {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  opacity: 0.6;
+}

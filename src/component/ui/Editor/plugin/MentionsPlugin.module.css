@@ -1,0 +1,39 @@
+.container {
+  min-height: 40px;
+  max-height: 300px;
+  box-shadow: 0px 0px 5px 1px rgba(128, 128, 128, 0.253);
+  width: 200px;
+  position: absolute;
+  padding: 5px 5px 0px 5px;
+  border-radius: 7px;
+  background-color: white;
+  top: 24px;
+}
+.container li {
+  list-style: none;
+}
+.container .item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  gap: 7px;
+  cursor: pointer;
+  padding: 7px 7px;
+  border-radius: 4px;
+}
+.container .item .content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.container .item .content .name {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.container .item .content .subText {
+  font-size: 0.8rem;
+  color: grey;
+}
+.container .item:hover {
+  background-color: #dadada;
+}

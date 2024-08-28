@@ -1087,7 +1087,7 @@
 }
 
 /* Opacity */
-.UI-2ANI-BOX-opacity-0\%{
+.UI-2ANI-BOX-opacity-0\% {
   opacity: 0;
 }
 .UI-2ANI-BOX-opacity-10\% {
@@ -1352,7 +1352,49 @@
   padding-right: 100px;
 }
 
+/* Css Editor */
 
+.editor-text-hashtag {
+  color: rgb(29, 155, 240);
+  font-weight: 500;
+}
 
+.editor-text-bold {
+  font-weight: bold !important;
+}
 
+.editor-text-underline {
+  text-decoration: underline !important;
+}
 
+.editor-text-strikethrough {
+  text-decoration: line-through !important;
+}
+
+.editor-text-italic {
+  font-style: italic;
+}
+
+.editor-text-underlineStrikethrough {
+  text-decoration: line-through !important;
+}
+
+.editor-code {
+  background-color: black;
+  color: white;
+}
+
+.editor-quote {
+  margin: 0;
+  margin-left: 20px;
+  font-size: 15px;
+  color: rgb(101, 103, 107);
+  border-left-color: rgb(206, 208, 212);
+  border-left-width: 4px;
+  border-left-style: solid;
+  padding-left: 16px;
+}
+
+.editor-paragraph {
+  margin: auto;
+}

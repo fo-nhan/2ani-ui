@@ -204,7 +204,8 @@ type JoinTypeProps = {
     | "default"
     | "black"
     | "white"
-    | "auto";
+    | "auto"
+    | "none";
   backgroundHover?:
     | "primary"
     | "secondary"
@@ -226,7 +227,7 @@ type JoinTypeProps = {
   gap?: 5 | 7 | 10 | 15 | 20 | 25 | 50 | 75 | 100;
   position?: "static" | "relative" | "absolute" | "fixed";
   onClick?: (event?: Event) => void;
-  onHover?: (hover?: Boolean, event?: Event) => void;
+  onHover?: (hover?: boolean, event?: Event) => void;
   loading?: boolean;
   className?: string;
   style?: React.CSSProperties;
@@ -252,7 +253,8 @@ type JoinTypeProps = {
     | "100%";
   paddingY?: 5 | 10 | 15 | 20 | 25 | 50 | 100;
   paddingX?: 5 | 10 | 15 | 20 | 25 | 50 | 100;
-  noCopy?: boolean
+  noCopy?: boolean;
+  customRef?: React.MutableRefObject<any>;
 };
 
 export type BoxTypeProps = JoinTypeProps & {
@@ -300,6 +302,7 @@ const Box = ({
   paddingX,
   paddingY,
   noCopy = false,
+  customRef,
   ...props
 }: BoxTypeProps) => {
   const [state, setState] = React.useState<JoinTypeProps | null>();
@@ -310,9 +313,7 @@ const Box = ({
     return [
       (state?.flex || flex ? `UI-2ANI-BOX-${state?.flex || flex}` : "") || "",
       `UI-2ANI-BOX-cursor-${state?.cursor || cursor}`,
-      state?.align || align
-      ? `UI-2ANI-BOX-align-${state?.align || align}`
-      : "",
+      state?.align || align ? `UI-2ANI-BOX-align-${state?.align || align}` : "",
       state?.fontSize || fontSize
         ? `UI-2ANI-BOX-fontSize-${state?.fontSize || fontSize}`
         : "",
@@ -406,7 +407,7 @@ const Box = ({
     paddingX,
     paddingY,
     noCopy,
-    opacity
+    opacity,
   ]);
 
   React.useEffect(() => {
@@ -440,11 +441,12 @@ const Box = ({
         </div>
       ) : (
         <div
+          {...{ ...props, ...(style ? { style } : {}) }}
           onMouseEnter={(e: any) => onHover?.(true, e)}
           onMouseLeave={(e: any) => onHover?.(false, e)}
           onClick={(e: any) => onClick?.(e)}
-          {...{ ...props, ...(style ? { style } : {}) }}
           className={classInline}
+          ref={customRef}
         >
           {children || ""}
         </div>
