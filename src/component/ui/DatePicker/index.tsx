@@ -169,7 +169,7 @@ const DatePicker = ({
     <div className={styles.datePicker} ref={ref}>
       <input
         type="text"
-        className={`${styles.dateInput} UI-2ANI-BOX-width-${width}`}
+        className={`${styles.dateInput} UI-2ANI-BOX-width-${width} ${theme?.backgroundColorClass || ""}`}
         value={currentDate ? getTime(currentDate).time : ""}
         onChange={handleInputChange}
         placeholder={placeholder}
@@ -188,7 +188,7 @@ const DatePicker = ({
             <Text weight="bold" size="h5">
               Lịch
             </Text>
-            <div className={styles.calendarTitleIcon}>
+            <div className={styles.calendarTitleIcon} onClick={toggleCalendar}>
               <Icon type="close" />
             </div>
           </Box>

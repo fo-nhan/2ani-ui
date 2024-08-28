@@ -1,0 +1,50 @@
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  min-height: 50px;
+  padding: 10px;
+}
+.toolbar .layout {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 100%;
+}
+.toolbar .line {
+  height: 30px;
+  width: 1px;
+  background-color: rgba(128, 128, 128, 0.3);
+}
+.toolbar .itemText {
+  height: 35px;
+  padding: 0px 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 500;
+}
+.toolbar .itemText:hover {
+  background-color: rgba(128, 128, 128, 0.316);
+}
+.toolbar .item {
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.toolbar .item:hover {
+  background-color: rgba(128, 128, 128, 0.116);
+}
+.toolbar .checked {
+  background-color: rgba(128, 128, 128, 0.178);
+  font-weight: bold;
+}

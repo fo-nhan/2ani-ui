@@ -50,7 +50,7 @@ const Tooltip = ({
         bottom: elementBottom > 100 ? "auto" : `${elementBottom + height}px`,
       });
     }
-  }, [ref.current, hover, scroll]);
+  }, [ref, hover, scroll]);
 
   useEffect(() => {
     let ele: any = document.getElementById("__tooltip");

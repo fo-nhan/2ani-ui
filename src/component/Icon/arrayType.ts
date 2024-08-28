@@ -29,6 +29,24 @@ export type IconTypeMap =
   | "angle-right"
   | "angle-left"
   | "check"
+  | "align-justify"
+  | "list"
+  | "list-number"
+  | "quote"
+  | "code"
+  | "undo"
+  | "redo"
+  | "edit-box"
+  | "link"
+  | "table"
+  | "color"
+  | "video"
+  | "italic"
+  | "underline"
+  | "strikethrough"
+  | "align-center"
+  | "align-left"
+  | "align-right";
 
 export type IconTypeProps = React.HTMLAttributes<HTMLOrSVGElement> & {
   type: IconTypeMap;

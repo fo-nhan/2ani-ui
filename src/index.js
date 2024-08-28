@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import '2ani-ui/src/styles/config.css';
-import { UI2aniContext } from "2ani-ui";
+import './component/styles/config.css';
+import { UI2aniContext } from "./component";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

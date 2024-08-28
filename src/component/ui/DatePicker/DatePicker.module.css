@@ -50,7 +50,7 @@
     z-index: 1000;
     top: 10vh;
     left: 10px;
-    width: calc(100vw - 20px);
+    width: calc(100vw - 40px);
   }
 
   .overlay {
@@ -113,7 +113,7 @@
 }
 
 .calendarDay:hover {
-  background-color: #eee;
+  background-color: #a8a8a83f;
 }
 
 .selected {

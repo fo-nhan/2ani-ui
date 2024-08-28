@@ -1,3 +1,5 @@
+"use client";
+
 import React, { Context, createContext } from "react";
 
 export type StateThemeProps = {
@@ -19,7 +21,7 @@ export type StateThemeProps = {
 
 export type StateContextProps = Context<{
   theme: StateThemeProps;
-  setTheme: (key?: "light" | "dark" | string) => void;
+  setTheme: (key?: "light" | "dark" | (string & {})) => void;
 }>;
 
 export const reState: StateContextProps = createContext({
@@ -87,7 +89,7 @@ function UI2aniContext({
       id="root-ui"
     >
       <reState.Provider
-        value={{ theme, setTheme: (key: any) => setTheme(key) }}
+        value={{ theme, setTheme: (key: "light" | "dark" | (string & {}) | undefined) => setTheme(defaultTheme[key || defaultThemeKey || "light"]) }}
       >
         {children}
       </reState.Provider>

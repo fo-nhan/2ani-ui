@@ -1,14 +1,15 @@
 import React from "react";
 import "./App.css";
+import { Editor, Popup, useAniState } from "./component";
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
+  const state = useAniState();
+
+  console.log(state);
 
   return (
     <div className="App">
-      <div className="layout">
-        
-      </div>
-   
+      <Editor placeholder="Viết thử đi" hashTags />
     </div>
   );
 }
