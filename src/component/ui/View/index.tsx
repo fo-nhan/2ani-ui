@@ -1,77 +1,173 @@
-import Image from "next/image";
-import Link from "next/link";
-import React, { CSSProperties, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./View.module.css";
 import Skeleton from "../Skeleton";
+import Box, { BoxTypeProps } from "../Box";
 
-type TypeProps = React.HTMLAttributes<HTMLDivElement> & {
-  src?: string;
-  style?: CSSProperties;
-  classChildren?: string;
-  styleChildren?: CSSProperties;
-  borderRadius?: number | string;
-  hoverZoom?: boolean;
-  imageKey?: any;
+export type ViewTypeProps = {
+  src: string;
+  alt?: string;
+  className?: string;
+  delay?: number; // Thêm prop để cấu hình thời gian trì hoãn
+  width?:
+    | 25
+    | 50
+    | 75
+    | 100
+    | 125
+    | 150
+    | 200
+    | 250
+    | 300
+    | 350
+    | 400
+    | 500
+    | 600
+    | 700
+    | 1000
+    | "10%"
+    | "25%"
+    | "50%"
+    | "75%"
+    | "100%"
+    | "25vw"
+    | "50vw"
+    | "75vw"
+    | "100vw";
+  height?:
+    | 20
+    | 25
+    | 30
+    | 35
+    | 40
+    | 50
+    | 60
+    | 70
+    | 80
+    | 90
+    | 100
+    | 120
+    | 150
+    | 175
+    | 200
+    | 250
+    | 300
+    | 400
+    | 500
+    | 600
+    | 700
+    | "25%"
+    | "50%"
+    | "75%"
+    | "100%"
+    | "25vh"
+    | "50vh"
+    | "75vh"
+    | "100vh";
+  borderRadius?: 4 | 7 | 10 | 15 | 50 | 100;
+  classImage?: string;
+  onClick?: Function;
+  parentProps?: BoxTypeProps;
 };
 
-const View = ({
+const View: React.FC<ViewTypeProps> = ({
   src,
-  style,
-  classChildren = "",
-  styleChildren,
-  borderRadius = 0,
-  hoverZoom = false,
-  imageKey,
-  ...props
-}: TypeProps) => {
-  const ref = useRef<any>();
-  const [loading, setLoading] = React.useState(true);
-  const [imgSrc, setImgSrc] = React.useState<any>();
+  alt,
+  className,
+  delay = 100,
+  height = "100%",
+  width = "100%",
+  borderRadius,
+  classImage,
+  onClick,
+  parentProps,
+}) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    const handleIntersection = ([entry]: IntersectionObserverEntry[]) => {
+      if (entry.isIntersecting) {
+        setShouldLoad(true);
+        observer.unobserve(entry.target);
+      }
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.1,
+    });
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
+    // Clean up observer on unmount
+    return () => {
+      if (imgRef.current) {
+        observer.unobserve(imgRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (shouldLoad) {
+      const image = new Image();
+      image.src = src;
+      image.onload = () => {
+        setTimeout(() => setIsLoaded(true), delay);
+      };
+    }
+  }, [shouldLoad, src, delay]);
 
   return (
     <div
-      {...props}
-      className={`${hoverZoom ? styles.imageHover : ""} ${props.className}`}
-      style={{ position: "relative", overflow: "hidden", ...style }}
-      ref={ref}
+      ref={imgRef}
+      className={`${height ? `UI-2ANI-BOX-height-${height}` : ""} ${
+        height ? `UI-2ANI-BOX-width-${width}` : ""
+      } ${
+        borderRadius ? `UI-2ANI-BOX-borderRadius-${borderRadius}` : ""
+      } ${className || ""}`}
     >
-      {loading && (
+      {!isLoaded && (
         <Skeleton
-          className={classChildren}
-          style={{
-            ...styleChildren,
-            borderRadius: borderRadius,
-          }}
+          className={`${height ? `UI-2ANI-BOX-height-${height}` : ""} ${
+            height ? `UI-2ANI-BOX-width-${width}` : ""
+          } ${
+            borderRadius ? `UI-2ANI-BOX-borderRadius-${borderRadius}` : ""
+          } ${className || ""}`}
         />
       )}
-      
-      {src && !loading ? (
-        <>
-          <Image
-              alt={"Can't open"}
-              className={classChildren}
-              style={{
-                ...styleChildren,
-                borderRadius: borderRadius,
-              }}
-              onLoadingComplete={() => {
-                setLoading(false);
-              }}
-              onLoad={() => setLoading(false)}
-              priority
-              placeholder="blur"
-              layout="fill"
-              src={`${imgSrc || src}`}
-              blurDataURL={`${imgSrc || src}`}
-              {...(imageKey ? { key: imageKey } : {})}
-              onError={(event: any) => {
-                event.target.id = src;
-                event.target.srcset = src;
-                setImgSrc(src);
-              }}
-            />
-        </>
-      ) : ""}
+      {!parentProps && shouldLoad && (
+        <img
+          className={`${styles.viewImage} ${
+            borderRadius ? `UI-2ANI-BOX-borderRadius-${borderRadius}` : ""
+          } ${isLoaded ? styles.loaded : ""} ${classImage || ""}`}
+          src={src}
+          alt={alt || "Image Alt"}
+          style={{ display: isLoaded ? "block" : "none" }}
+          onClick={(e) => onClick?.(e)}
+        />
+      )}
+      {parentProps && shouldLoad && (
+        <Box
+          {...parentProps}
+          className={`${height ? `UI-2ANI-BOX-height-${height}` : ""} ${
+            height ? `UI-2ANI-BOX-width-${width}` : ""
+          } ${
+            borderRadius ? `UI-2ANI-BOX-borderRadius-${borderRadius}` : ""
+          } ${parentProps?.className || ""} ${className || ""}`}
+        >
+          <img
+            className={`${styles.viewImage} ${
+              borderRadius ? `UI-2ANI-BOX-borderRadius-${borderRadius}` : ""
+            } ${isLoaded ? styles.loaded : ""} ${classImage || ""}`}
+            src={src}
+            alt={alt || "Image Alt"}
+            style={{ display: isLoaded ? "block" : "none" }}
+            onClick={(e) => onClick?.(e)}
+          />
+        </Box>
+      )}
     </div>
   );
 };

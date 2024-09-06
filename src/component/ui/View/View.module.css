@@ -1,8 +1,18 @@
-.imageHover span{
-        overflow: hidden;
+.viewImage {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  max-width: 100%;
+  display: block; 
+  height: 100%;
 }
 
-.imageHover span img:hover {
-                transition: all 0.3s ease-in-out;
-                transform: scale(1.2);
+.viewImage.loaded {
+  opacity: 1;
+}
+
+.skeleton {
+  background-color: #e0e0e0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
 }

@@ -1,0 +1,105 @@
+.content {
+  text-align: center;
+  font-weight: 600;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 1.5px;
+  background-size: cover !important;
+  width: 100%;
+  cursor: pointer;
+}
+.circle {
+  border-radius: 50%;
+}
+.time {
+  position: absolute;
+  font-size: 7px;
+  font-weight: 700;
+  color: #00a33f;
+  bottom: -1.5px;
+  left: 12px;
+  width: 80%;
+  background-color: rgb(181, 250, 215);
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.status {
+  position: absolute;
+  width: 8.5px;
+  height: 8.5px;
+  border-radius: 100%;
+  right: 1px;
+  bottom: -1.5px;
+}
+.on {
+  background-color: #30df58;
+}
+.none {
+  display: none;
+}
+.of {
+  background-color: #d7d7d7;
+}
+.busy {
+  background-color: rgb(237, 108, 2);
+}
+.tiny {
+  max-width: 16px;
+  height: 16px;
+  font-size: 16px;
+  width: 16px;
+}
+.titan {
+  max-width: 70px;
+  height: 70px;
+  font-size: 70px;
+  width: 70px;
+}
+.small {
+  max-width: 24px;
+  height: 24px;
+  font-size: 24px;
+  width: 24px;
+}
+.medium {
+  max-width: 32px;
+  height: 32px;
+  font-size: 32px;
+  width: 32px;
+}
+.large {
+  max-width: 38px;
+  height: 38px;
+  font-size: 38px;
+  width: 38px;
+}
+.big {
+  max-width: 48px;
+  height: 48px;
+  font-size: 48px;
+  width: 48px;
+}
+.bigLarge {
+  max-width: 56px;
+  height: 56px;
+  font-size: 56px;
+  width: 56px;
+}
+.group {
+  display: inline-flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+}
+.item {
+  position: relative;
+  margin-left: -8px;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}

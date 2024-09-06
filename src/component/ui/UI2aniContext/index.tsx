@@ -1,6 +1,7 @@
 "use client";
 
 import React, { Context, createContext } from "react";
+import { TypeColorProps } from "../../type";
 
 export type StateThemeProps = {
   key?: "light" | "dark" | (string & {});
@@ -16,6 +17,18 @@ export type StateThemeProps = {
   bodyBackgroundColorClass?: string;
   fontFamily?: string;
   fontFamilyClass?: string;
+  buttonClass?: {
+    primary: string;
+    secondary: string;
+    info: string;
+    warning: string;
+    violet: string;
+    sunny: string;
+    pink: string;
+    default: string;
+    white: string;
+    black: string;
+  };
   [key: string]: any;
 };
 
@@ -59,6 +72,18 @@ function UI2aniContext({
       bodyBackgroundColorClass: "UI-2ANI-bodyBackgroundColor--light",
       fontFamily: `"Segoe UI", "San Francisco", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif`,
       fontFamilyClass: "UI-2ANI-font",
+      buttonClass: {
+        primary: "UI-2ANI-primary",
+        secondary: "UI-2ANI-secondary",
+        info: "UI-2ANI-info",
+        warning: "UI-2ANI-warning",
+        violet: "UI-2ANI-violet",
+        sunny: "UI-2ANI-sunny",
+        pink: "UI-2ANI-pink",
+        default: "UI-2ANI-default",
+        white: "UI-2ANI-white",
+        black: "UI-2ANI-black",
+      },
       ...configLightTheme,
     },
     dark: {
@@ -72,24 +97,45 @@ function UI2aniContext({
       bodyBackgroundColorClass: "UI-2ANI-bodyBackgroundColor--dark",
       fontFamily: `"Segoe UI", "San Francisco", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif`,
       fontFamilyClass: "UI-2ANI-font",
+      buttonClass: {
+        primary: "UI-2ANI-primary",
+        secondary: "UI-2ANI-secondary",
+        info: "UI-2ANI-info",
+        warning: "UI-2ANI-warning",
+        violet: "UI-2ANI-violet",
+        sunny: "UI-2ANI-sunny",
+        pink: "UI-2ANI-pink",
+        default: "UI-2ANI-default",
+        white: "UI-2ANI-white",
+        black: "UI-2ANI-black",
+      },
       ...configDarkTheme,
     },
   } as const;
 
-  const [theme, setTheme] = React.useState(defaultTheme[defaultThemeKey]);
+  const [theme, setTheme] = React.useState({
+    key: defaultThemeKey,
+    ...defaultTheme[defaultThemeKey],
+  });
 
   return (
     <div
       style={{
         minHeight: "100vh",
-        width: "100vw",
         ...style,
       }}
       className={`${theme.bodyBackgroundColorClass} ${theme.textColorClass} ${theme.fontFamilyClass}`}
       id="root-ui"
     >
       <reState.Provider
-        value={{ theme, setTheme: (key: "light" | "dark" | (string & {}) | undefined) => setTheme(defaultTheme[key || defaultThemeKey || "light"]) }}
+        value={{
+          theme,
+          setTheme: (key: "light" | "dark" | (string & {}) | undefined) =>
+            setTheme({
+              key: key || defaultThemeKey,
+              ...defaultTheme[key || defaultThemeKey || "light"],
+            }),
+        }}
       >
         {children}
       </reState.Provider>
