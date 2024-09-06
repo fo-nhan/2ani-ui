@@ -354,7 +354,6 @@ export function ToolbarPlugin() {
                   gap={5}
                   className={`${blockType === "B" && styles.checked}`}
                   height={35}
-                  overflowY={false}
                   onClick={() => setOpenImage(true)}
                 >
                   <div style={{ width: "23px", height: "18px" }}>
@@ -370,7 +369,6 @@ export function ToolbarPlugin() {
                   gap={5}
                   className={`${blockType === "B" && styles.checked}`}
                   height={35}
-                  overflowY={false}
                 >
                   <div style={{ width: "23px", height: "18px" }}>
                     <Icon size={18} type="link" />
@@ -385,7 +383,6 @@ export function ToolbarPlugin() {
                   gap={5}
                   className={`${blockType === "B" && styles.checked}`}
                   height={35}
-                  overflowY={false}
                 >
                   <div style={{ width: "23px", height: "18px" }}>
                     <Icon size={18} type="table" />
@@ -400,7 +397,6 @@ export function ToolbarPlugin() {
                   gap={5}
                   className={`${blockType === "B" && styles.checked}`}
                   height={35}
-                  overflowY={false}
                 >
                   <div style={{ width: "23px", height: "18px" }}>
                     <Icon size={18} type="color" />
@@ -415,7 +411,6 @@ export function ToolbarPlugin() {
                   gap={5}
                   className={`${blockType === "B" && styles.checked}`}
                   height={35}
-                  overflowY={false}
                 >
                   <div style={{ width: "23px", height: "18px" }}>
                     <Icon size={18} type="video" />

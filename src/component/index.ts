@@ -42,6 +42,9 @@ export { default as StepAnimation } from "./ui/StepAnimation";
 export { default as Slide } from "./ui/Slide";
 export { default as Popup } from "./ui/Popup";
 export { default as Editor } from "./ui/Editor";
+export { default as View } from "./ui/View";
+export { default as Avatar } from "./ui/Avatar";
+export { default as GroupAvatar } from "./ui/Avatar/GroupAvatar";
 
 // Icon
 export { default as Icon } from "./Icon/index";

@@ -5,6 +5,7 @@ import { returnStyle } from "../../utils/style";
 import { IconTypeMap } from "../../Icon/arrayType";
 import Loading from "../Loading";
 import Icon from "../../Icon";
+import useAniState from "../../hooks/useAniState";
 
 export type ButtonProps = {
   children?: React.ReactNode;
@@ -32,14 +33,15 @@ function Button({
   sizeIcon,
   ...props
 }: ButtonProps) {
+  const { theme: themeGlobal } = useAniState();
   return (
     <button
       {...props}
       className={returnStyle(
         [
           "myButton",
-          `UI-2ANI-${theme}`,
-          `UI-2ANI-${theme}-hover`,
+          `${themeGlobal?.buttonClass?.[theme] || ""}`,
+          `${themeGlobal?.buttonClass?.[theme] || ""}-hover`,
           size,
           className,
         ],

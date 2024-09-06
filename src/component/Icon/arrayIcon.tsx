@@ -47,8 +47,69 @@ import Strikethrough from "./libary/Strikethrough";
 import AlignCenter from "./libary/AlignCenter";
 import AlignLeft from "./libary/AlignLeft";
 import AlignRight from "./libary/AlignRight";
+import Chat from "./libary/Chat";
+import Users from "./libary/Users";
+import UserAdd from "./libary/UserAdd";
+import UserGroup from "./libary/UserGroup";
+import UserCheck from "./libary/UserCheck";
+import UserPen from "./libary/UserPen";
+import UserX from "./libary/UserX";
+import UserGear from "./libary/UserGear";
+import Setting from "./libary/Setting";
+import DotVertical from "./libary/DotVertical";
+import DotLine from "./libary/DotLine";
+import Share from "./libary/Share";
+import Sliders from "./libary/Sliders";
+import Music from "./libary/Music";
+import Global from "./libary/Global";
+import Lock from "./libary/Lock";
+import Keys from "./libary/Keys";
+import Location from "./libary/Location";
+import Send from "./libary/Send";
+import ShareNodes from "./libary/ShareNodes";
+import Plus from "./libary/Plus";
+
+import Shape from "./libary/Shape";
+import Qrcode from "./libary/Qrcode";
+import ReactLove from "./libary/ReactLove";
+import ReactAngry from "./libary/ReactAngry";
+import ReactCare from "./libary/ReactCare";
+import ReactHaha from "./libary/ReactHaha";
+import ReactLike from "./libary/ReactLike";
+import ReactSad from "./libary/ReactSad";
+import ReactWow from "./libary/ReactWow";
 
 export const arrayIcon: any = {
+  "react-wow": <ReactWow />,
+  "react-sad": <ReactSad />,
+  "react-like": <ReactLike />,
+  "react-haha": <ReactHaha />,
+  "react-care": <ReactCare />,
+  "react-angry": <ReactAngry />,
+  "react-love": <ReactLove />,
+  qrcode: <Qrcode />,
+  shape: <Shape />,
+  plus: <Plus />,
+  "share-nodes": <ShareNodes />,
+  send: <Send />,
+  location: <Location />,
+  keys: <Keys />,
+  lock: <Lock />,
+  global: <Global />,
+  music: <Music />,
+  sliders: <Sliders />,
+  share: <Share />,
+  "dot-line": <DotLine />,
+  "dot-vertical": <DotVertical />,
+  setting: <Setting />,
+  "user-gear": <UserGear />,
+  "user-x": <UserX />,
+  "user-pen": <UserPen />,
+  "user-check": <UserCheck />,
+  "user-group": <UserGroup />,
+  "user-add": <UserAdd />,
+  users: <Users />,
+  chat: <Chat />,
   "align-right": <AlignRight />,
   "align-left": <AlignLeft />,
   "align-center": <AlignCenter />,

@@ -1,4 +1,12 @@
 export type IconTypeMap =
+  | "user-gear"
+  | "user-x"
+  | "user-pen"
+  | "user-check"
+  | "user-group"
+  | "user-add"
+  | "users"
+  | "chat"
   | "house"
   | "close"
   | "magnifying-glass"
@@ -46,7 +54,29 @@ export type IconTypeMap =
   | "strikethrough"
   | "align-center"
   | "align-left"
-  | "align-right";
+  | "align-right"
+  | "setting"
+  | "dot-vertical"
+  | "dot-line"
+  | "share"
+  | "sliders"
+  | "music"
+  | "global"
+  | "lock"
+  | "keys"
+  | "location"
+  | "send"
+  | "share-nodes"
+  | "plus"
+  | "react-love"
+  | "qrcode"
+  | "shape"
+  | "react-angry"
+  | "react-care"
+  | "react-haha"
+  | "react-like"
+  | "react-sad"
+  | "react-wow";
 
 export type IconTypeProps = React.HTMLAttributes<HTMLOrSVGElement> & {
   type: IconTypeMap;
