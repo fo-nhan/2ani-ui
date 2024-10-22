@@ -1,5 +1,5 @@
 import { multilingual } from "./helper";
-import { DateLocalization, FormatDateOptions } from "./type";
+import { DateLocalization, FormatDateOptions, Language } from "./type";
 
 //Lấy ra các thông số độ dài, khoảng cách của một element
 export const SizeOfElement = (element: any) => {
@@ -306,7 +306,7 @@ class Time {
     return this.formatDate(format, configLanguage || formatLanguage);
   }
 
-  public lang(lang: string): this {
+  public lang(lang: Language): this {
     if (!multilingual[lang]) {
       throw new Error(`Language '${lang}' not supported.`);
     }
@@ -319,4 +319,4 @@ class Time {
   }
 }
 
-export const time = (date: Date | string) => new Time(date);
+export const timejs = (date: Date | string) => new Time(date);

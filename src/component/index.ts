@@ -55,7 +55,7 @@ export { default as Icon } from "./Icon/index";
 
 // Function
 export {
-  time,
+  timejs,
   SizeOfElement,
   Sort,
   getTextWidth,

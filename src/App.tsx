@@ -13,7 +13,7 @@ import {
   Input,
   Popup,
   Slide,
-  time,
+  timejs,
   useAniState,
   useForm,
   useGetSizeImage,

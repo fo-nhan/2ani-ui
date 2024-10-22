@@ -1,3 +1,29 @@
+/** 
+  * L: Danh sách các ngày trong tuần viết hoa
+  * l: Danh sách các ngày trong tuần viết thường
+  * tK: Ký tự cho "lúc" viết thường
+  * TK: Ký tự cho "Lúc" viết hoa
+  * eM: Danh sách các tháng viết thường
+  * EM: Danh sách các tháng viết hoa
+  * tY: Ký tự cho "năm" viết thường
+  * TY: Ký tự cho "Năm" viết hoa
+  * vx: Ký tự cho "Vừa xong"
+  * vp: Ký tự cho "Vài giây trước"
+  * vs: Ký tự cho "Sắp tới"
+  * vv: Ký tự cho "trước"
+  * xx: Ký tự cho "sau"
+  * tD: Ký tự cho "ngày" viết thường
+  * TD: Ký tự cho "Ngày" viết hoa
+  * tM: Ký tự cho "tháng" viết thường
+  * TM: Ký tự cho "Tháng" viết hoa
+  * tH: Ký tự cho "giờ" viết thường
+  * TH: Ký tự cho "Giờ" viết hoa
+  * tI: Ký tự cho "phút" viết thường
+  * TI: Ký tự cho "Phút" viết hoa
+  * tS: Ký tự cho "giây" viết thường
+  * TS: Ký tự cho "Giây" viết hoa
+
+*/
 export type FormatDateOptions =
   | "YYYY/MM/DD"
   | "DD/MM/YYYY"
@@ -57,3 +83,5 @@ export type DateLocalization = {
   tS: string; // Ký tự cho "giây" viết thường
   TS: string; // Ký tự cho "Giây" viết hoa
 };
+
+export type Language = "vi" | "en" | "ja" | "lo" | "zh" | "fr";
