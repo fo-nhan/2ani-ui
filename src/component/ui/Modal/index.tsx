@@ -3,6 +3,8 @@ import styles from "./Modal.module.css";
 import useDetectElement from "../../hooks/useDetectElement";
 import Icon from "../../Icon";
 import useAniState from "../../hooks/useAniState";
+import Box, { BoxTypeProps } from "../Box";
+import { SizeOfElement } from "../../utils/fs";
 
 export type ModalProps = {
   title?: string | React.ReactNode;
@@ -18,6 +20,9 @@ export type ModalProps = {
   classHeader?: string;
   classTitle?: string;
   size?: "lg" | "sm" | "xs" | "auto" | "fw" | "md";
+  containerProps?: BoxTypeProps;
+  contentProps?: BoxTypeProps;
+  overlayProps?: BoxTypeProps;
 };
 
 function Modal({
@@ -31,6 +36,9 @@ function Modal({
   classOverlay = "",
   classTitle = "",
   size = "sm",
+  containerProps = {},
+  contentProps = {},
+  overlayProps = {},
 }: ModalProps) {
   const ref = React.useRef(null);
 
@@ -39,19 +47,31 @@ function Modal({
   const { theme } = useAniState();
 
   React.useEffect(() => {
-    if(isOpen){
+    if (isOpen) {
       onClose?.(false, ref?.current || undefined);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDetect]);
 
+  React.useEffect(() => {
+    if (isOpen) {
+      const size = SizeOfElement(document.body);
+      document.body.style.width = size.width + "px";
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "";
+      document.body.style.width = "";
+    }
+  }, [isOpen])
+
   if (!isOpen || !isDetect) return null;
 
   return (
-    <div className={`${styles.modalOverlay} ${classOverlay}`}>
-      <div
+    <Box {...overlayProps} className={`${styles.modalOverlay} ${classOverlay}`}>
+      <Box
+        {...containerProps}
         className={`${styles.modal} UI-2ANI-${size} ${theme?.backgroundColorClass}`}
-        ref={ref}
+        customRef={ref}
       >
         <div className={`${styles.modalHeader} ${classHeader}`}>
           <div className={`${styles.modalHeaderTitle} ${classTitle}`}>
@@ -66,9 +86,14 @@ function Modal({
             </button>
           )}
         </div>
-        <div className={`${styles.modalBody} ${classContent}`}>{children}</div>
-      </div>
-    </div>
+        <Box
+          {...contentProps}
+          className={`${styles.modalBody} ${classContent}`}
+        >
+          {children}
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

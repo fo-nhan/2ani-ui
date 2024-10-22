@@ -1,115 +1,117 @@
 .container {
-    height: 100%;
-    width: 100%;
-    gap: 10px;
-    overflow-y: hidden;
-    position: relative;
+  height: 100%;
+  width: 100%;
+  gap: 4px;
+  overflow-y: hidden;
+  position: relative;
 }
 .container .content {
-    height: 100%;
-    display: -webkit-box;
-    overflow-x: auto;
-    gap: 20px;
-    overflow-y: hidden;
-    cursor: move;
+  height: 100%;
+  display: -webkit-box;
+  overflow-x: auto;
+  gap: 10px;
+  overflow-y: hidden;
+  cursor: move;
 }
 .container .content::-webkit-scrollbar {
-    height: 0px !important;
-    width: 0px !important;
+  height: 0px !important;
+  width: 0px !important;
 }
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
     .container .content {
         display: inline-flex;
    }
-}
+} */
 .container .content .item {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    position: relative;
-    box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.219);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
 }
-.container .content .item:first-child {
-    margin-left: 10px;
+
+.container .content .itemBoxshadow {
+  box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.219);
 }
-.container .content .item:last-child {
-    margin-right: 20px;
+
+.container .content .startEndPadding:first-child {
+  margin-left: 10px;
+}
+.container .content .startEndPadding:last-child {
+  margin-right: 20px;
 }
 .container .next {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100%;
-    background-color: white;
-    box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.267);
-    right: 5px;
-    top: calc(50% - 20px);
-    cursor: pointer;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.267);
+  right: 5px;
+  top: calc(50% - 20px);
+  cursor: pointer;
 }
 .container .next:hover {
-    background-color: #e6e6e6;
+  background-color: #a8a8a8;
 }
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
     .container .next {
         display: none;
    }
-}
+} */
 .container .prev {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100%;
-    background-color: white;
-    box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.267);
-    left: 5px;
-    top: calc(50% - 20px);
-    cursor: pointer;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.267);
+  left: 5px;
+  top: calc(50% - 20px);
+  cursor: pointer;
 }
 .container .prev:hover {
-    background-color: #e6e6e6;
+  background-color: #a8a8a8;
 }
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
     .container .prev {
         display: none;
    }
-}
+} */
 .container .dot {
-    width: 100%;
-    height: 100%;
-    max-height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+  width: 100%;
+  height: 100%;
+  max-height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
     .container .dot {
         display: none;
    }
-}
+} */
 .container .dot .dotItem {
-    width: 8px;
-    height: 8px;
-    background-color: rgba(128, 128, 128, 0.651);
-    border-radius: 100%;
-    cursor: pointer;
+  width: 8px;
+  height: 8px;
+  background-color: rgba(128, 128, 128, 0.651);
+  border-radius: 100%;
+  cursor: pointer;
 }
 .container .dot .dotChecked {
-    background-color: #51abff;
-    width: 10px;
-    height: 10px;
+  background-color: #51abff;
+  width: 10px;
+  height: 10px;
 }
 .flex {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
     .flex {
         display: block;
    }
-}
+} */

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { Context, createContext } from "react";
-import { TypeColorProps } from "../../type";
 
 export type StateThemeProps = {
   key?: "light" | "dark" | (string & {});

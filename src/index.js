@@ -9,7 +9,7 @@ import { UI2aniContext } from "./component";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <UI2aniContext>
+    <UI2aniContext >
       <App />
     </UI2aniContext>
   </React.StrictMode>

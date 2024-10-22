@@ -1,14 +1,16 @@
 import React from "react";
 import Text from "../Text";
 import styles from "./style.module.css";
+import Box, { BoxTypeProps } from "../Box";
 
 type TypeProps = {
-  children: React.ReactNode;
+  children: React.ReactNode | React.ReactNode;
   name?: string;
   label?: string | React.ReactNode;
   style?: React.CSSProperties;
-  className?: string,
-  id?: string
+  className?: string;
+  id?: string;
+  parentProps?: BoxTypeProps;
 };
 
 const FormItem = ({
@@ -18,6 +20,7 @@ const FormItem = ({
   style = {},
   className = "",
   id = "",
+  parentProps = {},
   ...props
 }: TypeProps) => {
   const {
@@ -98,8 +101,8 @@ const FormItem = ({
       }
     }
 
-    if (label && text) {
-      const element = textContent(label as any);
+    if (text) {
+      const element = textContent((label || name) as any);
 
       text = text.replaceAll("#name", element || "");
     }
@@ -108,7 +111,8 @@ const FormItem = ({
   }, [name, form, label]);
 
   return (
-    <div
+    <Box
+      {...parentProps}
       className={`${styles.item} ${returnRequire ? styles.require : ""} ${className}`}
     >
       {label && <Text>{label}</Text>}
@@ -116,15 +120,20 @@ const FormItem = ({
         return React.cloneElement(child, {
           key: i,
           ...props,
-          
-          ...(name ? { name, value:
-            name &&
-            form &&
-            form.values &&
-            // typeof form.values?.[name] === "object"
-            form.values?.[name]
-              ? form.values?.[name]
-              : "", } : {}),
+
+          ...(name
+            ? {
+                name,
+                value:
+                  name &&
+                  form &&
+                  form.values &&
+                  // typeof form.values?.[name] === "object"
+                  form.values?.[name]
+                    ? form.values?.[name]
+                    : "",
+              }
+            : {}),
         });
       })}
       {name && (
@@ -137,7 +146,7 @@ const FormItem = ({
           {returnRequire}
         </Text>
       )}
-    </div>
+    </Box>
   );
 };
 

@@ -3,6 +3,8 @@ import styles from "./Slide.module.css";
 import { SizeOfElement } from "../../utils/fs";
 import Skeleton from "../Skeleton";
 import Icon from "../../Icon";
+import useAniState from "../../hooks/useAniState";
+import useTouch from "../../hooks/useTouch";
 
 export type SlideTypeProps = {
   data: any[];
@@ -19,6 +21,10 @@ export type SlideTypeProps = {
   showButton?: boolean;
   dotButton?: boolean;
   reSize?: number;
+  boxShadow?: boolean;
+  startEndPadding?: boolean;
+  infinite?: boolean;
+  start?: number;
 };
 
 const Slide = ({
@@ -36,12 +42,19 @@ const Slide = ({
   showButton = false,
   dotButton = false,
   reSize = 0.8,
+  boxShadow = false,
+  startEndPadding = false,
+  infinite = false,
+  start = 0,
 }: SlideTypeProps) => {
   const [init, setInit] = React.useState({
-    current: 0,
+    current: start,
     init: 0,
   });
+  const { theme } = useAniState();
   const ref = React.useRef<any>();
+
+  const touch = useTouch(ref);
   const styleItem = React.useMemo(() => {
     let stl: any = {};
     if (width) stl.width = width;
@@ -70,6 +83,28 @@ const Slide = ({
       const stopDraggingBox = (e: any) => {
         e.preventDefault();
         mouseDownBox = false;
+
+        if (infinite) {
+          const x = e.pageX - sliderBox.offsetLeft;
+          const scroll = x - startXBox;
+          const { width } = SizeOfElement(sliderBox);
+          const newWidth = Math.round(width * reSize + 10);
+          if (scrollLeftBox - scroll + newWidth > sliderBox.scrollWidth) {
+            sliderBox.scrollTo({
+              top: 0,
+              left: 1,
+              behavior: "smooth",
+            });
+            sliderBox.scrollLeft = 1;
+          } else if (scrollLeftBox - scroll < 0) {
+            sliderBox.scrollTo({
+              top: 0,
+              left: scroll,
+              behavior: "smooth",
+            });
+            sliderBox.scrollLeft = sliderBox.scrollWidth;
+          }
+        }
       };
 
       const moveBox = (e: any) => {
@@ -96,7 +131,7 @@ const Slide = ({
         (e: any) => {
           stopDraggingBox(e);
           const { scrollWidth, width, scrollLeft } = SizeOfElement(sliderBox);
-          const newWidth = Math.round(width * reSize);
+          const newWidth = Math.round(width * reSize + 10);
           const maxStep = Math.ceil(scrollWidth / newWidth);
           const initStep = Math.ceil(scrollLeft / newWidth);
           let scroll = 0;
@@ -104,13 +139,13 @@ const Slide = ({
             scroll = (initStep >= maxStep ? maxStep : initStep) * newWidth;
             setInit({
               current: initStep,
-              init: Math.floor(scrollWidth / newWidth),
+              init: Math.ceil(scrollWidth / newWidth),
             });
           } else {
             scroll = (initStep - 1) * newWidth;
             setInit({
               current: initStep - 1,
-              init: Math.floor(scrollWidth / newWidth),
+              init: Math.ceil(scrollWidth / newWidth),
             });
           }
 
@@ -125,20 +160,78 @@ const Slide = ({
       sliderBox.addEventListener("mouseleave", stopDraggingBox, false);
 
       const { scrollWidth, width } = SizeOfElement(sliderBox);
-      const newWidth = Math.round(width * 0.8);
-      setInit({
-        current: 0,
-        init: Math.floor(scrollWidth / newWidth),
-      });
+      const newWidth = Math.round(width * reSize + 10);
+      if (start !== 0) {
+        sliderBox.scrollLeft = (start - 1) * newWidth;
+        setInit({
+          current: start - 1,
+          init: Math.ceil(scrollWidth / newWidth),
+        });
+      } else {
+        setInit({
+          current: 0,
+          init: Math.ceil(scrollWidth / newWidth),
+        });
+      }
     }
-  }, [ref, reSize]);
+  }, [ref, reSize, infinite, start]);
+
+  React.useEffect(() => {
+    if (
+      touch &&
+      touch.key === "swipe" &&
+      touch.direction &&
+      touch.direction === "right"
+    ) {
+      if (init.current + 1 < init.init) {
+        const sliderBox: any = ref.current;
+        const { width } = SizeOfElement(sliderBox);
+        const newWidth = Math.round(width * reSize + 10);
+
+        sliderBox.scrollTo({
+          top: 0,
+          left: ((init.current || 0) + 1) * newWidth,
+          behavior: "smooth",
+        });
+
+        setInit({
+          ...init,
+          current: (init.current || 0) + 1,
+        });
+      }
+    }
+
+    if (
+      touch &&
+      touch.key === "swipe" &&
+      touch.direction &&
+      touch.direction === "left"
+    ) {
+      if (init.current > 0) {
+        const sliderBox: any = ref.current;
+        const { width } = SizeOfElement(sliderBox);
+        const newWidth = Math.round(width * reSize + 10);
+
+        sliderBox.scrollTo({
+          top: 0,
+          left: (init.current - 1) * newWidth,
+          behavior: "smooth",
+        });
+
+        setInit({
+          ...init,
+          current: init.current - 1,
+        });
+      }
+    }
+  }, [touch]);
 
   const onNext = (e: any) => {
     e.preventDefault();
-    if (init.current < init.init) {
+    if (init.current + 1 < init.init) {
       const sliderBox: any = ref.current;
       const { width } = SizeOfElement(sliderBox);
-      const newWidth = Math.round(width * 0.8);
+      const newWidth = Math.round(width * reSize + 10);
 
       sliderBox.scrollTo({
         top: 0,
@@ -158,7 +251,7 @@ const Slide = ({
     if (init.current > 0) {
       const sliderBox: any = ref.current;
       const { width } = SizeOfElement(sliderBox);
-      const newWidth = Math.round(width * 0.8);
+      const newWidth = Math.round(width * reSize + 10);
 
       sliderBox.scrollTo({
         top: 0,
@@ -176,7 +269,7 @@ const Slide = ({
   const onChangeDot = (i: number) => {
     const sliderBox: any = ref.current;
     const { width }: any = SizeOfElement(sliderBox);
-    const newWidth = Math.round(width * 0.8);
+    const newWidth = Math.round(width * reSize + 10);
 
     sliderBox.scrollTo({
       top: 0,
@@ -194,7 +287,10 @@ const Slide = ({
     <div className={`${styles.container} ${dotButton && styles.flex}`}>
       <div ref={ref} className={`${styles.content} ${className}`}>
         {firstElement && !loading ? (
-          <div style={styleItem} className={`${styles.item} ${classNameItem}`}>
+          <div
+            style={styleItem}
+            className={`${styles.item} ${boxShadow ? styles.itemBoxshadow : ""} ${startEndPadding ? styles.startEndPadding : ""} ${classNameItem}`}
+          >
             {firstElement}
           </div>
         ) : (
@@ -204,14 +300,17 @@ const Slide = ({
           data.map((value: any, index: number) => (
             <div
               style={styleItem}
-              className={`${styles.item} ${classNameItem}`}
+              className={`${styles.item} ${boxShadow ? styles.itemBoxshadow : ""} ${startEndPadding ? styles.startEndPadding : ""} ${classNameItem}`}
               key={index}
             >
               {render(value, index)}
             </div>
           ))}
         {lastElement && !loading ? (
-          <div style={styleItem} className={`${styles.item} ${classNameItem}`}>
+          <div
+            style={styleItem}
+            className={`${styles.item} ${boxShadow ? styles.itemBoxshadow : ""} ${startEndPadding ? styles.startEndPadding : ""} ${classNameItem}`}
+          >
             {lastElement}
           </div>
         ) : (
@@ -225,7 +324,7 @@ const Slide = ({
                 {lazyRender || (
                   <Skeleton
                     style={{ height: "auto", ...styleItem, display: "block" }}
-                    className={`${styles.item} ${classNameItem}`}
+                    className={`${styles.item} ${boxShadow ? styles.itemBoxshadow : ""} ${classNameItem}`}
                   />
                 )}
               </React.Fragment>
@@ -234,12 +333,18 @@ const Slide = ({
       {showButton && (
         <>
           {!!(init.current > 0) && (
-            <div onClick={onPrev} className={styles.prev}>
+            <div
+              onClick={onPrev}
+              className={`${styles.prev} ${theme?.backgroundColorClass || ""}`}
+            >
               <Icon type="arrow-left" />
             </div>
           )}
-          {!!(init.current < init.init) && (
-            <div onClick={onNext} className={styles.next}>
+          {!!(init.current + 1 < init.init) && (
+            <div
+              onClick={onNext}
+              className={`${styles.next} ${theme?.backgroundColorClass || ""}`}
+            >
               <Icon type="arrow-right" />
             </div>
           )}
@@ -247,7 +352,7 @@ const Slide = ({
       )}
       {dotButton && (
         <div className={styles.dot}>
-          {Array(init.init + 1)
+          {Array(init.init)
             .fill("")
             .map((val, index) => (
               <div

@@ -79,7 +79,18 @@ import ReactLike from "./libary/ReactLike";
 import ReactSad from "./libary/ReactSad";
 import ReactWow from "./libary/ReactWow";
 
+import FileImport from "./libary/FileImport";
+import Upload from "./libary/Upload";
+import UploadArrow from "./libary/UploadArrow";
+import UploadCloud from "./libary/UploadCloud";
+import UploadFile from "./libary/UploadFile";
+
 export const arrayIcon: any = {
+  "upload-file": <UploadFile />,
+  "upload-cloud": <UploadCloud />,
+  "upload-arrow": <UploadArrow />,
+  upload: <Upload />,
+  "file-import": <FileImport />,
   "react-wow": <ReactWow />,
   "react-sad": <ReactSad />,
   "react-like": <ReactLike />,
