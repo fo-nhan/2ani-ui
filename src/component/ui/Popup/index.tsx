@@ -12,6 +12,7 @@ export type PopupTypeProps = {
   propsParent?: BoxTypeProps;
   content?: React.ReactNode | string;
   type?: "hover" | "click";
+  offset?: number
 };
 
 const Popup = ({
@@ -20,6 +21,7 @@ const Popup = ({
   propsChildren = {},
   propsParent = {},
   type = "hover",
+  offset = 0
 }: PopupTypeProps) => {
   const ref = React.useRef<any>();
   const [open, setOpen] = React.useState(false);
@@ -54,12 +56,12 @@ const Popup = ({
                 : elementSize.height + elementSize.elementBottom + "px",
             left:
               elementSize.elementRight > elementSize.elementLeft
-                ? elementSize.elementLeft + "px"
+                ? (elementSize.elementLeft + offset) + "px"
                 : "auto",
             right:
               elementSize.elementRight > elementSize.elementLeft
                 ? "auto"
-                : elementSize.elementRight + "px",
+                : (elementSize.elementRight + offset) + "px",
           };
 
           setSizeObject(getStyles);

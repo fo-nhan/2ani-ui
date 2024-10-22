@@ -1,3 +1,6 @@
+import { multilingual } from "./helper";
+import { DateLocalization, FormatDateOptions } from "./type";
+
 //Lấy ra các thông số độ dài, khoảng cách của một element
 export const SizeOfElement = (element: any) => {
   try {
@@ -155,3 +158,165 @@ export const getTextWidth = (text: string) => {
     return 0;
   }
 };
+
+class Time {
+  private date: Date;
+  private locale: string;
+
+  constructor(date: Date | string) {
+    if (!date) {
+      throw new Error(
+        "Date cannot be null or undefined. Please provide a valid date string or Date object."
+      );
+    }
+
+    this.date = new Date(date);
+    if (isNaN(this.date.getTime())) {
+      throw new Error(
+        "The date is not valid. Please provide a valid date string or Date object."
+      );
+    }
+
+    this.locale = "vi"; // Default locale
+  }
+
+  private formatDate(
+    format: FormatDateOptions,
+    formatLanguage: DateLocalization
+  ): string {
+    let newFormat: any = format;
+    if (format === "L") {
+      newFormat = "L, DD eM tY YYYY";
+    }
+    if (format === "LL") {
+      newFormat = "L, DD eM tY YYYY tK HH:mm";
+    }
+    if (format === "LT") {
+      newFormat = "L, DD eM tY YYYY tK hh:mm";
+    }
+
+    if (format === "F") {
+      const now = new Date().getTime();
+      const timeUnil = this.date.getTime();
+      const diff = now - timeUnil;
+
+      // Thay đổi đơn vị thời gian theo nhu cầu
+      const seconds = 1000;
+      const minutes = seconds * 60;
+      const hours = minutes * 60;
+      const days = hours * 24;
+      const month = days * 30;
+      const year = days * 365.6;
+
+      newFormat = `MM/YYYY`;
+
+      if (diff < minutes) {
+        newFormat = "vx";
+      }
+
+      if (diff < 30 * seconds) {
+        newFormat = "vp";
+      }
+
+      if (diff < 0) {
+        newFormat = "vs";
+      }
+
+      if (diff >= minutes && diff < hours) {
+        newFormat = `${Math.floor(diff / minutes)} tI vv`;
+      }
+
+      if (diff >= hours && diff < days) {
+        newFormat = `${Math.floor(diff / hours)} tH vv`;
+      }
+
+      if (diff >= days && diff < month) {
+        newFormat = `${Math.floor(diff / days)} tD vv`;
+      }
+
+      if (diff >= month && diff < year) {
+        newFormat = `DD/MM`;
+      }
+    }
+    const pad = (n: number) => (n < 10 ? `0${n}` : n.toString());
+
+    const year = this.date.getFullYear();
+    const month = pad(this.date.getMonth() + 1);
+    const day = pad(this.date.getDate());
+
+    // Lấy giờ, phút, giây và mili giây
+    const hours24 = this.date.getHours();
+    const minutes = pad(this.date.getMinutes());
+    const seconds = pad(this.date.getSeconds());
+    const milliseconds = this.date.getMilliseconds(); // Mili giây không cần pad vì có thể lớn hơn 100
+
+    // Lấy thứ trong tuần (0: Chủ nhật, 1: Thứ 2, ... 6: Thứ 7)
+    const yearShort = year.toString().slice(-2);
+    const hours12 = hours24 % 12 || 12;
+    const ampm = hours24 >= 12 ? "PM" : "AM";
+
+    return newFormat
+      .split(" ")
+      .map((key: any) =>
+        key?.trim()
+          ? key
+              .replace("YYYY", year.toString())
+              .replace("YY", yearShort)
+              .replace("MM", month)
+              .replace("DD", day)
+              .replace("HH", pad(hours24)) // giờ theo định dạng 24 giờ
+              .replace("hh", pad(hours12)) // giờ theo định dạng 12 giờ
+              .replace("mm", minutes)
+              .replace("ss", seconds)
+              .replace("SSS", milliseconds)
+              .replace("A", ampm) // thêm AM/PM
+              .replace("L", formatLanguage.L[this.date.getDay()])
+              .replace("l", formatLanguage.l[this.date.getDay()])
+              .replace("tK", formatLanguage.tK)
+              .replace("TK", formatLanguage.TK)
+              .replace("eM", formatLanguage.eM[this.date.getMonth()])
+              .replace("EM", formatLanguage.EM[this.date.getMonth()])
+              .replace("tY", formatLanguage.tY)
+              .replace("TY", formatLanguage.TY)
+              .replace("vx", formatLanguage.vx)
+              .replace("vp", formatLanguage.vp)
+              .replace("vv", formatLanguage.vv)
+              .replace("vs", formatLanguage.vs)
+              .replace("xx", formatLanguage.xx)
+              .replace("tD", formatLanguage.tD)
+              .replace("TD", formatLanguage.TD)
+              .replace("tM", formatLanguage.tM)
+              .replace("TM", formatLanguage.TM)
+              .replace("tH", formatLanguage.tH)
+              .replace("TH", formatLanguage.TH)
+              .replace("tI", formatLanguage.tI)
+              .replace("TI", formatLanguage.TI)
+              .replace("tS", formatLanguage.tS)
+              .replace("TS", formatLanguage.TS)
+          : ""
+      )
+      .join(" ");
+  }
+
+  public format(
+    format: FormatDateOptions = "DD/MM/YYYY",
+    configLanguage?: DateLocalization
+  ): string {
+    const formatLanguage = multilingual[this.locale];
+    return this.formatDate(format, configLanguage || formatLanguage);
+  }
+
+  public lang(lang: string): this {
+    if (!multilingual[lang]) {
+      throw new Error(`Language '${lang}' not supported.`);
+    }
+    this.locale = lang;
+    return this;
+  }
+
+  public toString(): string {
+    return this.format("DD/MM/YYYY");
+  }
+}
+
+export const time = (date: Date | string) => new Time(date);

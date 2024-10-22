@@ -1,4 +1,9 @@
 export type IconTypeMap =
+  | "file-import"
+  | "upload"
+  | "upload-arrow"
+  | "upload-cloud"
+  | "upload-file"
   | "user-gear"
   | "user-x"
   | "user-pen"

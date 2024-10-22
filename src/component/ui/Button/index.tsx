@@ -18,6 +18,7 @@ export type ButtonProps = {
   type?: "button" | "submit";
   icon?: IconTypeMap;
   sizeIcon?: number;
+  form?: any;
 } & React.HTMLAttributes<HTMLButtonElement>;
 
 function Button({
@@ -31,6 +32,7 @@ function Button({
   iconColor,
   type = "button",
   sizeIcon,
+  form = null,
   ...props
 }: ButtonProps) {
   const { theme: themeGlobal } = useAniState();
@@ -47,6 +49,7 @@ function Button({
         ],
         styles
       )}
+      type={type}
     >
       {loading ? (
         <Loading color="white" size={2} width={18} />

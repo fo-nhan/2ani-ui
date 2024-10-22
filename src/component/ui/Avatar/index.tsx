@@ -16,6 +16,7 @@ type TypeProps = {
   className?: any;
   zIndex?: number;
   onClick?: Function;
+  shadow?: "fill" | "gradient" | "blue" | 'red' | "violet" | "grey"
 };
 const Avatar = ({
   src,
@@ -29,6 +30,7 @@ const Avatar = ({
   className,
   zIndex,
   onClick = () => {},
+  shadow,
   ...props
 }: TypeProps) => {
   const { theme } = useAniState();
@@ -44,7 +46,7 @@ const Avatar = ({
     () => (
       <>
         {src ? (
-          <View onClick={onClick} className={styles.avatar} src={src || ""} />
+          <View onClick={onClick} width={"100%"} height={"100%"} src={src || ""} borderRadius={"100%"} objectFit="cover"/>
         ) : (
           children
         )}
@@ -77,9 +79,10 @@ const Avatar = ({
       className={returnStyle(
         [
           "content",
+          `${shadow ? "shadow-" + shadow : ""}`,
           `${type}`,
           `${size}`,
-          `text-${color}`,
+          `UI-2ANI-text-${color}`,
           color === "auto" ? theme?.textColorClass || "" : "",
         ],
         styles

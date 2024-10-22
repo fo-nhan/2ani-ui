@@ -9,6 +9,7 @@ export { default as useScrollBottom } from "./hooks/useScrollBottom";
 export { default as useScroll } from "./hooks/useScroll";
 export { default as useTouch } from "./hooks/useTouch";
 export { default as useResponsive } from "./hooks/useResponsive";
+export { default as useGetSizeImage } from "./hooks/useGetSizeImage";
 
 // Form
 export { default as Form } from "./ui/Form";
@@ -45,12 +46,16 @@ export { default as Editor } from "./ui/Editor";
 export { default as View } from "./ui/View";
 export { default as Avatar } from "./ui/Avatar";
 export { default as GroupAvatar } from "./ui/Avatar/GroupAvatar";
+export { default as ImageGallery } from "./ui/ImageGallery";
+export { default as Cropper } from "./ui/Cropper";
+export { default as FullView } from "./ui/FullView";
 
 // Icon
 export { default as Icon } from "./Icon/index";
 
 // Function
 export {
+  time,
   SizeOfElement,
   Sort,
   getTextWidth,

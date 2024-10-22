@@ -151,7 +151,7 @@ const Input = ({
               e?.target?.value?.trim()?.length < 1 &&
               form.form.requires[name].notNull
             ) {
-              form.setrequire(name, { message: "Data cannot be left blank" });
+              form.setrequire(name, { message: "Dữ liệu không thể để trống" });
             }
           }
           break;

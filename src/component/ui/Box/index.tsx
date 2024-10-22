@@ -1,149 +1,34 @@
 import React from "react";
-import useWidth from "../../hooks/useWidth";
 import Skeleton from "../Skeleton";
 import useAniState from "../../hooks/useAniState";
-
-type PositionValue =
-  | "auto"
-  | 0
-  | 2
-  | 3
-  | 5
-  | 7
-  | 10
-  | 15
-  | 20
-  | 25
-  | 50
-  | 75
-  | 100
-  | 150
-  | 200
-  | "5%"
-  | "10%"
-  | "25%"
-  | "50%"
-  | "75%"
-  | "100%"
-  | "5vw"
-  | "10vw"
-  | "25vw"
-  | "50vw"
-  | "75vw"
-  | "100vw";
-
-type CSSProperties = {
-  // Layout
-  width?: string;
-  height?: string;
-  margin?: string;
-  padding?: string;
-  border?: string;
-  "border-radius"?: string;
-  "box-shadow"?: string;
-  display?: string;
-  position?: string;
-  top?: string;
-  right?: string;
-  bottom?: string;
-  left?: string;
-  "z-index"?: number;
-
-  // Background
-  background?: string;
-  "background-color"?: string;
-  "background-image"?: string;
-  "background-position"?: string;
-  "background-size"?: string;
-
-  // Typography
-  color?: string;
-  "font-family"?: string;
-  "font-size"?: string;
-  "font-weight"?: string | number;
-  "line-height"?: string;
-  "text-align"?: string;
-  "text-transform"?: string;
-  "letter-spacing"?: string;
-  "word-spacing"?: string;
-
-  // Flexbox
-  "flex-direction"?: string;
-  "flex-wrap"?: string;
-  "justify-content"?: string;
-  "align-items"?: string;
-  "align-self"?: string;
-  "align-content"?: string;
-
-  // Grid
-  "grid-template-columns"?: string;
-  "grid-template-rows"?: string;
-  "grid-area"?: string;
-  "grid-column"?: string;
-  "grid-row"?: string;
-
-  // Transitions and Animations
-  transition?: string;
-  "transition-property"?: string;
-  "transition-duration"?: string;
-  "transition-timing-function"?: string;
-  animation?: string;
-  "animation-name"?: string;
-  "animation-duration"?: string;
-  "animation-timing-function"?: string;
-  "animation-delay"?: string;
-  "animation-iteration-count"?: string;
-
-  // Transform
-  transform?: string;
-  "transform-origin"?: string;
-
-  // Other
-  opacity?: string | number;
-  overflow?: string;
-  visibility?: string;
-  cursor?: string;
-  "white-space"?: string;
-  "word-break"?: string;
-  "text-overflow"?: string;
-  "overflow-wrap"?: string;
-};
-
-type AnimationType = {
-  name: string;
-  from: CSSProperties; // e.g., "{width: '0%', background: 'red'}"
-  to: CSSProperties; // e.g., "{width: '100%', background: 'white'}"
-  duration?: string; // e.g., "1s", "500ms"
-  timingFunction?:
-    | "linear"
-    | "ease"
-    | "ease-in"
-    | "ease-out"
-    | "ease-in-out"
-    | "steps"
-    | "cubic-bezier"; // Add cubic-bezier if you need custom timing functions
-  delay?: string; // e.g., "0s", "1s"
-  iterationCount?: number | "infinite"; // Add number type to allow specific iteration counts
-  direction?: "normal" | "reverse" | "alternate" | "alternate-reverse";
-  fillMode?: "none" | "forwards" | "backwards" | "both";
-  playState?: "running" | "paused";
-};
+import { TypeColorProps } from "../../type";
+import {
+  AnimationType,
+  BorderRadiusType,
+  BorderStyle,
+  BorderWidth,
+  CSSProperties,
+  DisplayType,
+  FlexType,
+  FontSizeType,
+  LightHeightType,
+  OpacityType,
+  OverflowType,
+  PositionValue,
+  RangeType,
+  ShadowType,
+  SizeHType,
+  SizeMaxHType,
+  SizeMaxWType,
+  SizeMinHType,
+  SizeMinWType,
+  SizeWType,
+  ZIndexType,
+} from "./type";
 
 type JoinTypeProps = {
   children?: React.ReactNode | string;
-  flex?:
-    | "flex"
-    | "flexEnd"
-    | "flexStart"
-    | "flexAlign"
-    | "flexCenter"
-    | "flexColumn"
-    | "flexBetween"
-    | "flexColumnAlign"
-    | "flexColumnBetween"
-    | "flexDefault"
-    | "flexEndCenter"
-    | "flexStartCenter";
+  flex?: FlexType;
   justify?:
     | "flexStart"
     | "flexEnd"
@@ -160,196 +45,18 @@ type JoinTypeProps = {
     | "no-drop"
     | "text"
     | "pointer";
-  fontSize?: 10 | 13 | 14 | 15 | 16 | 18 | 20 | 22 | 25 | 30 | 35 | 50;
-  borderRadius?:
-    | 4
-    | 7
-    | 10
-    | 15
-    | 20
-    | 30
-    | 45
-    | 50
-    | 100
-    | "25%"
-    | "50%"
-    | "75%"
-    | "100%"
-    | "1rem"
-    | "2rem"
-    | "4rem"
-    | "10rem"
-    | "25rem";
-  width?:
-    | 25
-    | 50
-    | 75
-    | 100
-    | 125
-    | 150
-    | 200
-    | 250
-    | 300
-    | 350
-    | 400
-    | 500
-    | 600
-    | 700
-    | 1000
-    | "10%"
-    | "25%"
-    | "50%"
-    | "75%"
-    | "100%"
-    | "25vw"
-    | "50vw"
-    | "75vw"
-    | "100vw";
-  height?:
-    | 20
-    | 25
-    | 30
-    | 35
-    | 40
-    | 50
-    | 60
-    | 70
-    | 80
-    | 90
-    | 100
-    | 120
-    | 150
-    | 175
-    | 200
-    | 250
-    | 300
-    | 400
-    | 500
-    | 600
-    | 700
-    | "25%"
-    | "50%"
-    | "75%"
-    | "100%"
-    | "25vh"
-    | "50vh"
-    | "75vh"
-    | "100vh";
-  minWidth?:
-    | 25
-    | 50
-    | 75
-    | 100
-    | 125
-    | 150
-    | 200
-    | 250
-    | 300
-    | 350
-    | 400
-    | 500
-    | 600
-    | 700
-    | 1000
-    | "10%"
-    | "25%"
-    | "50%"
-    | "75%"
-    | "100%"
-    | "25vw"
-    | "50vw"
-    | "75vw"
-    | "100vw";
-  minHeight?:
-    | 20
-    | 25
-    | 30
-    | 35
-    | 40
-    | 50
-    | 60
-    | 70
-    | 80
-    | 90
-    | 100
-    | 120
-    | 150
-    | 175
-    | 200
-    | 250
-    | 300
-    | 400
-    | 500
-    | 600
-    | 700
-    | "25%"
-    | "50%"
-    | "75%"
-    | "100%"
-    | "25vh"
-    | "50vh"
-    | "75vh"
-    | "100vh";
-  maxWidth?:
-    | 25
-    | 50
-    | 75
-    | 100
-    | 125
-    | 150
-    | 200
-    | 250
-    | 300
-    | 350
-    | 400
-    | 500
-    | 600
-    | 700
-    | 1000
-    | 1200
-    | 1400
-    | 1600
-    | 1800
-    | 2000
-    | "10%"
-    | "25%"
-    | "50%"
-    | "75%"
-    | "100%"
-    | "25vw"
-    | "50vw"
-    | "75vw"
-    | "100vw";
-  maxHeight?:
-    | 20
-    | 25
-    | 30
-    | 35
-    | 40
-    | 50
-    | 60
-    | 70
-    | 80
-    | 90
-    | 100
-    | 120
-    | 150
-    | 175
-    | 200
-    | 250
-    | 300
-    | 400
-    | 500
-    | 600
-    | 700
-    | "25%"
-    | "50%"
-    | "75%"
-    | "100%"
-    | "25vh"
-    | "50vh"
-    | "75vh"
-    | "100vh";
+  fontSize?: FontSizeType;
+  borderRadius?: BorderRadiusType;
+  width?: SizeWType;
+  height?: SizeHType;
+  minWidth?: SizeMinWType;
+
+  minHeight?: SizeMinHType;
+
+  maxWidth?: SizeMaxWType;
+
+  maxHeight?: SizeMaxHType;
+
   background?:
     | "primary"
     | "secondary"
@@ -384,64 +91,64 @@ type JoinTypeProps = {
     | "orange";
   textGradient?: "green" | "violet" | "blue" | "tomato" | "yellow" | "orange";
   gap?: 5 | 7 | 10 | 15 | 20 | 25 | 50 | 75 | 100;
-  position?: "static" | "relative" | "absolute" | "fixed";
-  onClick?: (event?: Event) => void;
-  onHover?: (hover?: boolean, event?: Event) => void;
+  position?: "static" | "relative" | "absolute" | "fixed" | "sticky";
+  onClick?: (
+    event?: Event,
+    setState?: React.Dispatch<
+      React.SetStateAction<JoinTypeProps | null | undefined>
+    >
+  ) => void;
+  onHover?: (
+    hover?: boolean,
+    event?: Event,
+    setState?: React.Dispatch<
+      React.SetStateAction<JoinTypeProps | null | undefined>
+    >
+  ) => void;
   loading?: boolean;
   className?: string;
   style?: React.CSSProperties;
-  pb?: 5 | 10 | 15 | 20 | 25 | 50;
-  pl?: 5 | 10 | 15 | 20 | 25 | 50;
-  pr?: 5 | 10 | 15 | 20 | 25 | 50;
-  pt?: 5 | 10 | 15 | 20 | 25 | 50;
-  mb?: 5 | 10 | 15 | 20 | 25 | 50;
-  ml?: 5 | 10 | 15 | 20 | 25 | 50;
-  mr?: 5 | 10 | 15 | 20 | 25 | 50;
-  mt?: 5 | 10 | 15 | 20 | 25 | 50;
-  opacity?:
-    | "0%"
-    | "10%"
-    | "20%"
-    | "30%"
-    | "40%"
-    | "50%"
-    | "60%"
-    | "70%"
-    | "80%"
-    | "90%"
-    | "100%";
-  paddingY?: 5 | 10 | 15 | 20 | 25 | 50 | 100;
-  paddingX?: 5 | 10 | 15 | 20 | 25 | 50 | 100;
+  pb?: RangeType;
+  pl?: RangeType;
+  pr?: RangeType;
+  pt?: RangeType;
+  mb?: RangeType;
+  ml?: RangeType;
+  mr?: RangeType;
+  mt?: RangeType;
+  opacity?: OpacityType;
+
+  paddingY?: RangeType;
+  paddingX?: RangeType;
   noCopy?: boolean;
   customRef?: React.MutableRefObject<any>;
-  shadow?: "xs" | "sm" | "md" | "lg";
+  shadow?: "xs" | "sm" | "md" | "lg" | ShadowType | "none";
   textShadow?: "black" | "white" | "primary" | "warning" | "info";
-  display?:
-    | "block"
-    | "inline"
-    | "inline-block"
-    | "flex"
-    | "grid"
-    | "inline-flex"
-    | "inline-grid"
-    | "none"
-    | "table"
-    | "table-row"
-    | "table-cell"
-    | "static"
-    | "relative"
-    | "absolute"
-    | "sticky"
-    | "fixed";
+  display?: DisplayType;
+
   top?: PositionValue;
   left?: PositionValue;
   bottom?: PositionValue;
   right?: PositionValue;
   animations?: AnimationType[];
   animation?: "fadeIn" | "slideIn" | "zoomIn" | "rotate" | "bounce" | "pulse";
-  overflow?: "visible" | "hidden" | "scroll" | "auto";
-  overflowY?: "visible" | "hidden" | "scroll" | "auto";
-  overflowX?: "visible" | "hidden" | "scroll" | "auto";
+  overflow?: OverflowType;
+  overflowY?: OverflowType;
+  overflowX?: OverflowType;
+  objectFit?: "fill" | "contain" | "cover" | "none" | "scale-down";
+  backgroundSize?: "auto" | "cover" | "contain";
+  zIndex?: ZIndexType;
+  textColor?: TypeColorProps | "auto";
+  textHover?: boolean;
+  lightHeight?: LightHeightType;
+  skeletonLaze?: boolean;
+  borderTopWidth?: BorderWidth;
+  borderRightWidth?: BorderWidth;
+  borderBottomWidth?: BorderWidth;
+  borderLeftWidth?: BorderWidth;
+  borderColor?: TypeColorProps;
+  borderStyle?: BorderStyle;
+  border?: boolean;
 };
 
 export type BoxTypeProps = JoinTypeProps & {
@@ -512,12 +219,30 @@ const Box = ({
   overflow,
   overflowX,
   overflowY,
+  objectFit,
+  backgroundSize,
+  zIndex,
+  textColor,
+  textHover,
+  lightHeight,
+  skeletonLaze,
+  border,
+  borderBottomWidth,
+  borderColor,
+  borderLeftWidth,
+  borderRightWidth,
+  borderStyle,
+  borderTopWidth,
+
   ...props
 }: BoxTypeProps) => {
   const [state, setState] = React.useState<JoinTypeProps | null>();
   const [loadingBox, setLoadingBox] = React.useState(true);
   const { theme } = useAniState();
-  const useW = useWidth();
+  const [responsiveLoading, setResponsiveLoading] = React.useState(
+    responsive ? true : false
+  );
+
   const classInline = React.useMemo(() => {
     return [
       (state?.flex || flex ? `UI-2ANI-BOX-${state?.flex || flex}` : "") || "",
@@ -616,9 +341,53 @@ const Box = ({
       state?.overflowY || overflowY
         ? `UI-2ANI-BOX-overflowY-${state?.overflowY || overflowY}`
         : "",
+      state?.objectFit || objectFit
+        ? `UI-2ANI-BOX-objectFit-${state?.objectFit || objectFit}`
+        : "",
+      state?.backgroundSize || backgroundSize
+        ? `UI-2ANI-BOX-backgroundSize-${state?.backgroundSize || backgroundSize}`
+        : "",
+      state?.zIndex || zIndex
+        ? `UI-2ANI-BOX-zIndex-${state?.zIndex || zIndex}`
+        : "",
+      state?.lightHeight || lightHeight
+        ? `UI-2ANI-BOX-lightHeight-${state?.lightHeight || lightHeight}`
+        : "",
+      state?.textColor || textColor
+        ? `UI-2ANI-text-${state?.textColor || textColor}`
+        : "",
+      (state?.textHover || textHover) && (state?.textColor || textColor)
+        ? `UI-2ANI-text-${state?.textColor || textColor}${state?.textHover || textHover ? "-hover" : ""}`
+        : "",
       state?.noCopy || noCopy ? `UI-2ANI-css-no-copy` : "",
+      state?.border || border ? `UI-2ANI-border` : "",
+      state?.borderColor || borderColor
+        ? `UI-2ANI-border-color-${state?.borderColor || borderColor}`
+        : "",
+      state?.borderStyle || borderStyle
+        ? `UI-2ANI-border-style-${state?.borderStyle || borderStyle}`
+        : "",
+      state?.borderLeftWidth || borderLeftWidth
+        ? `UI-2ANI-border-left-width-${state?.borderLeftWidth || borderLeftWidth}`
+        : "",
+      state?.borderRightWidth || borderRightWidth
+        ? `UI-2ANI-border-right-width-${state?.borderRightWidth || borderRightWidth}`
+        : "",
+      state?.borderTopWidth || borderTopWidth
+        ? `UI-2ANI-border-top-width-${state?.borderTopWidth || borderTopWidth}`
+        : "",
+      state?.borderBottomWidth || borderBottomWidth
+        ? `UI-2ANI-border-bottom-width-${state?.borderBottomWidth || borderBottomWidth}`
+        : "",
     ].join(" ");
   }, [
+    borderLeftWidth,
+    borderRightWidth,
+    borderTopWidth,
+    borderBottomWidth,
+    borderStyle,
+    borderColor,
+    border,
     state,
     align,
     cursor,
@@ -663,27 +432,45 @@ const Box = ({
     overflow,
     overflowX,
     overflowY,
+    objectFit,
+    backgroundSize,
+    zIndex,
+    textColor,
+    textColor,
+    lightHeight,
   ]);
 
   React.useEffect(() => {
-    const width = window.innerWidth;
+    const handleResize = () => {
+      const width = window.innerWidth;
 
-    if (width && responsive && responsive?.length) {
-      let change: any = {};
-      for (let index = 0; index < responsive.length; index++) {
-        const element = responsive[index];
-        const max = element.maxMedia || 9999;
-        const min = element.minMedia || 0;
+      if (width && responsive && responsive?.length) {
+        let change: any = {};
+        for (let index = 0; index < responsive.length; index++) {
+          const element = responsive[index];
+          const max = element.maxMedia || 9999;
+          const min = element.minMedia || 0;
 
-        if (width >= min && width <= max) {
-          change = element.style;
+          if (width >= min && width <= max) {
+            change = element.style;
+          }
         }
+        setState(change);
       }
+      setLoadingBox(false);
+      setResponsiveLoading(false);
+    };
 
-      setState(change);
-    }
-    setLoadingBox(false);
-  }, [responsive, useW]);
+    window.addEventListener("resize", handleResize);
+
+    // Gọi handleResize một lần khi component mount
+    handleResize();
+
+    // Cleanup event listener khi component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [responsive]);
 
   const styleSheetRef = React.useRef<any>(null);
 
@@ -771,24 +558,28 @@ const Box = ({
 
   return (
     <>
-      {loadingBox || loading ? (
-        <div
-          {...{ ...props, ...(style ? { style } : {}) }}
-          className={`${classInline} ${animationClasses}`}
-        >
-          <Skeleton />
-        </div>
-      ) : (
-        <div
-          {...{ ...props, ...(style ? { style } : {}) }}
-          onMouseEnter={(e: any) => onHover?.(true, e)}
-          onMouseLeave={(e: any) => onHover?.(false, e)}
-          onClick={(e: any) => onClick?.(e)}
-          className={`${classInline} ${animationClasses}`}
-          ref={customRef}
-        >
-          {children || ""}
-        </div>
+      {!responsiveLoading && (
+        <>
+          {loadingBox || loading ? (
+            <div
+              {...{ ...props, ...(style ? { style } : {}) }}
+              className={`${classInline} ${animationClasses}`}
+            >
+              {skeletonLaze ? <Skeleton /> : ""}
+            </div>
+          ) : (
+            <div
+              {...{ ...props, ...(style ? { style } : {}) }}
+              onMouseEnter={(e: any) => onHover?.(true, e, setState)}
+              onMouseLeave={(e: any) => onHover?.(false, e, setState)}
+              onClick={(e: any) => onClick?.(e, setState)}
+              className={`${classInline} ${animationClasses}`}
+              ref={customRef}
+            >
+              {children || ""}
+            </div>
+          )}
+        </>
       )}
     </>
   );

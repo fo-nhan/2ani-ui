@@ -131,7 +131,7 @@ const Form = ({
 
               if (require.notNull) {
                 if (value?.length < 1) {
-                  require.message = "Cannot be left blank field #name";
+                  require.message = "Không được bỏ trống trường #name";
                   checked = true;
                 }
               }

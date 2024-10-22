@@ -14,7 +14,7 @@ export type SkeletonProps = {
 const Skeleton = ({
   width = "100%",
   height = "100%",
-  borderRadius = 5,
+  borderRadius,
   style,
   className = "",
 }: SkeletonProps) => {
@@ -24,7 +24,7 @@ const Skeleton = ({
       style={{
         width: width,
         height: height,
-        borderRadius: borderRadius,
+        ...(borderRadius ? {borderRadius: borderRadius} : {}),
         ...style,
       }}
       className={returnStyle([theme.skeletonClass, className], styles)}
