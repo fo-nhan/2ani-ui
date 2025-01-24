@@ -84,8 +84,16 @@ import Upload from "./libary/Upload";
 import UploadArrow from "./libary/UploadArrow";
 import UploadCloud from "./libary/UploadCloud";
 import UploadFile from "./libary/UploadFile";
+import MenuApp from "./libary/MenuApp";
+import App from "./libary/App";
+import Menu from "./libary/Menu";
+import Oclock from "./libary/Oclock";
 
 export const arrayIcon: any = {
+  oclock: <Oclock />,
+  menu: <Menu />,
+  app: <App />,
+  "menu-app": <MenuApp />,
   "upload-file": <UploadFile />,
   "upload-cloud": <UploadCloud />,
   "upload-arrow": <UploadArrow />,

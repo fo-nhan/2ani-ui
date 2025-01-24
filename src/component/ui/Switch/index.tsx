@@ -5,6 +5,7 @@ import { returnStyle } from "../../utils/style";
 type TypeProps = {
   size?: number;
   defaultChecked?: boolean;
+  value?: boolean;
   onChange?: (swit: boolean) => void;
 };
 
@@ -12,15 +13,17 @@ const Switch = ({
   size = 50,
   defaultChecked = false,
   onChange = () => {},
+  value = false,
 }: TypeProps) => {
-  const [value, setValue] = React.useState<boolean | null>(null);
+  const [valueSwit, setValue] = React.useState<boolean | null>(null);
   React.useEffect(() => {
-    setValue(defaultChecked);
-  }, [defaultChecked]);
+    setValue(value || defaultChecked);
+  }, [defaultChecked, value]);
   const onHandleChecked = (e: any) => {
     setValue(e.target.checked);
     onChange(e.target.checked);
   };
+
   return (
     <label
       style={{
@@ -33,7 +36,7 @@ const Switch = ({
         onChange={(e: any) => onHandleChecked(e)}
         className={styles.__input}
         type="checkbox"
-        checked={value ?? false}
+        checked={valueSwit ?? false}
       />
       <span
         style={{

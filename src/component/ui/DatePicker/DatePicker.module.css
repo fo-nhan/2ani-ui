@@ -13,6 +13,7 @@
   font-weight: 500;
   color: grey;
   min-width: 180px;
+  box-sizing: border-box;
 }
 
 .calendarButton {

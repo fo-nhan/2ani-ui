@@ -10,14 +10,8 @@
 /* CONFIG FONT */
 
 .UI-2ANI-font {
-  font-family:
-    "Segoe UI",
-    "San Francisco",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Helvetica Neue",
-    Arial,
-    sans-serif;
+  font-family: "Segoe UI", "San Francisco", -apple-system, BlinkMacSystemFont,
+    "Helvetica Neue", Arial, sans-serif;
 }
 
 /* LIGHT */
@@ -4100,6 +4094,10 @@
 
 .UI-2ANI-BOX-zIndex-100000000 {
   z-index: 100000000;
+}
+
+.UI-2ANI-BOX-boxSizing {
+  box-sizing: border-box;
 }
 
 /* Css Editor */

@@ -1,4 +1,8 @@
 export type IconTypeMap =
+| "oclock"
+  | "menu"
+  | "app"
+  | "menu-app"
   | "file-import"
   | "upload"
   | "upload-arrow"
@@ -85,6 +89,6 @@ export type IconTypeMap =
 
 export type IconTypeProps = React.HTMLAttributes<HTMLOrSVGElement> & {
   type: IconTypeMap;
-  size?: number;
+  size?: number | string;
   color?: string;
 };

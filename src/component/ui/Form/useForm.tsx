@@ -1,113 +1,111 @@
-import React from "react";
-import { TypeFormProps, TypeFormRequieProps, TypeUseFormProps } from "./type";
+import { createContext, useContext, useState, useCallback } from "react";
+import { Rule, UseFormReturn } from "./type";
 
-type TypeProps = {
-  defaultConfig?: TypeFormProps;
-};
+// Tạo context để truyền form
+const FormContext = createContext<any>(null);
 
-const useForm = ({ defaultConfig }: TypeProps) => {
-  const ref = React.useRef<any>();
+function useForm<T>(rules: Record<keyof T | string, Rule[]>): UseFormReturn<T> {
+  const [values, setValues] = useState<Partial<T>>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const [form, setForm] = React.useState<TypeFormProps>({
-    values: defaultConfig?.values || {},
-    requires: defaultConfig?.requires || {},
-  });
+  const getFieldsValue = useCallback(() => values, [values]);
 
-  const onChangeDatas = (values: { [key: string | number]: any }) => {
-    setForm({
-      ...form,
-      values: {
-        ...values,
-      },
-    });
-  };
+  const setFieldsValue = useCallback((newValues: Partial<T>) => {
+    setValues((prev) => ({ ...prev, ...newValues }));
+  }, []);
 
-  const onChangeData = (name: string | number, value: any) => {
-    setForm({
-      ...form,
-      values: {
-        ...form.values,
-        [name]: value,
-      },
-    });
-  };
+  const setFieldValue = useCallback((field: keyof T, value: any) => {
+    setValues((prev) => ({ ...prev, [field]: value }));
+  }, []);
 
-  const onChangeRequires = (
-    name: string | number,
-    value: TypeFormRequieProps
-  ) => {
-    setForm({
-      ...form,
-      requires: {
-        ...form.requires,
-        [name]: {
-          ...(form?.requires?.[name] ? form.requires[name] : {}),
-          ...value,
-        },
-      },
-    });
-  };
+  const resetFields = useCallback(() => {
+    setValues({});
+    setErrors({});
+  }, []);
 
-  const onChangeReset = (initDefaultConfig?: TypeFormProps) => {
-    if (initDefaultConfig) setForm(initDefaultConfig);
+  const validateField = useCallback(
+    (field: keyof T) => {
+      const value =
+        (values[field] as any) ||
+        (values[field] as any)?.date ||
+        ((values[field] as any)?.target
+          ? (values[field] as any)?.target?.value || ""
+          : values[field]);
+      const fieldRules = rules[field];
+      if (!fieldRules) return true;
 
-    let requires : any = defaultConfig?.requires || {};
+      let errorMessage = "";
 
-    Object.keys(requires).forEach((value) => {
-      requires[value].message = null;
+      for (const rule of fieldRules) {
+        if (rule.required && !value) {
+          errorMessage = rule.message || "This field is required";
+          break;
+        }
 
-      if (requires[value].maxNumber)
-        requires[value].maxNumber = {
-          ...requires[value].maxNumber,
-          checked: false,
-        };
+        if (
+          rule.minLength &&
+          typeof value === "string" &&
+          value.length < rule.minLength
+        ) {
+          errorMessage = rule.message || `Minimum length is ${rule.minLength}`;
+          break;
+        }
 
-      if (requires[value].maxLength)
-        requires[value].maxLength = {
-          ...requires[value].maxLength,
-          checked: false,
-        };
+        if (
+          rule.maxLength &&
+          typeof value === "string" &&
+          value.length > rule.maxLength
+        ) {
+          errorMessage = rule.message || `Maximum length is ${rule.maxLength}`;
+          break;
+        }
 
-      if (requires[value].minLength)
-        requires[value].minLength = {
-          ...requires[value].minLength,
-          checked: false,
-        };
+        if (rule.pattern && value && !rule.pattern.test(value as any)) {
+          errorMessage = rule.message || "Invalid format";
+          break;
+        }
 
-      if (requires[value].minNumber)
-        requires[value].minNumber = {
-          ...requires[value].minNumber,
-          checked: false,
-        };
-
-      if (requires[value].regex)
-        requires[value].regex = {
-          ...requires[value].regex,
-          checked: false,
-        };
-    });
-    setForm(
-      initDefaultConfig || {
-        values: defaultConfig?.values || {},
-        requires: requires,
+        if (rule.fsc) {
+          const result = rule.fsc(value);
+          if (result.error) {
+            errorMessage = result.message || "Invalid format";
+            break;
+          }
+        }
       }
-    );
-  };
 
-  React.useEffect(() => {
-      onChangeReset?.()
-  }, [])
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [field]: errorMessage,
+      }));
+
+      return !errorMessage;
+    },
+    [values, rules]
+  );
+
+  const validateFields = useCallback(async () => {
+    const validationResults = await Promise.all(
+      Object.keys(rules).map(async (key) => {
+        const field = key as keyof T;
+        return validateField(field);
+      })
+    );
+    return validationResults.every((result) => result);
+  }, [rules, validateField]);
 
   return {
-    setFieldValues: onChangeDatas,
-    setFieldValue: onChangeData,
-    setRequire: onChangeRequires,
-    form: form,
-    ref: ref,
-    setForm: setForm,
-    reset: onChangeReset,
-    defaultConfig: defaultConfig,
-  } as TypeUseFormProps;
-};
+    getFieldsValue,
+    setFieldsValue,
+    resetFields,
+    validateFields,
+    setFieldValue,
+    errors,
+  };
+}
+
+export const FormProvider = FormContext.Provider;
+
+export const useFormContext = () => useContext(FormContext);
 
 export default useForm;

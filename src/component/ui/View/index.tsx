@@ -8,6 +8,7 @@ import FullView from "../FullView";
 type SizeWType =
   | "auto"
   | 25
+  | 40
   | 50
   | 75
   | 100
@@ -282,9 +283,11 @@ const View: React.FC<ViewTypeProps> = ({
       >
         <div
           ref={imgRef}
-          className={`UI-2ANI-css-no-copy ${maxHeight ? `UI-2ANI-BOX-maxHeight-${maxHeight}` : ""}  ${maxWidth ? `UI-2ANI-BOX-maxWidth-${maxWidth}` : ""} ${height ? `UI-2ANI-BOX-height-${height}` : ""} ${
-            width ? `UI-2ANI-BOX-width-${width}` : ""
-          } ${
+          className={`UI-2ANI-css-no-copy ${
+            maxHeight ? `UI-2ANI-BOX-maxHeight-${maxHeight}` : ""
+          }  ${maxWidth ? `UI-2ANI-BOX-maxWidth-${maxWidth}` : ""} ${
+            height ? `UI-2ANI-BOX-height-${height}` : ""
+          } ${width ? `UI-2ANI-BOX-width-${width}` : ""} ${
             borderRadius ? `UI-2ANI-BOX-borderRadius-${borderRadius}` : ""
           } ${className || ""}`}
         >
@@ -303,11 +306,17 @@ const View: React.FC<ViewTypeProps> = ({
           )}
           {!parentProps && shouldLoad && (
             <img
-              className={`${maxHeightImg ? `UI-2ANI-BOX-maxHeight-${maxHeightImg}` : ""}  ${maxWidthImg ? `UI-2ANI-BOX-maxWidth-${maxWidthImg}` : ""} ${heightImg ? `UI-2ANI-BOX-height-${heightImg}` : ""} ${
-                widthImg ? `UI-2ANI-BOX-width-${widthImg}` : ""
-              } ${styles.viewImage} ${
+              className={`${
+                maxHeightImg ? `UI-2ANI-BOX-maxHeight-${maxHeightImg}` : ""
+              }  ${maxWidthImg ? `UI-2ANI-BOX-maxWidth-${maxWidthImg}` : ""} ${
+                heightImg ? `UI-2ANI-BOX-height-${heightImg}` : ""
+              } ${widthImg ? `UI-2ANI-BOX-width-${widthImg}` : ""} ${
+                styles.viewImage
+              } ${
                 borderRadius ? `UI-2ANI-BOX-borderRadius-${borderRadius}` : ""
-              } ${isLoaded ? styles.loaded : ""} ${objectFit ? "UI-2ANI-BOX-objectFit-" + objectFit : ""} ${classImage || ""}`}
+              } ${isLoaded ? styles.loaded : ""} ${
+                objectFit ? "UI-2ANI-BOX-objectFit-" + objectFit : ""
+              } ${classImage || ""}`}
               src={error || src}
               alt={alt || "Image Alt"}
               style={{ display: isLoaded ? "block" : "none" }}
@@ -317,18 +326,26 @@ const View: React.FC<ViewTypeProps> = ({
           {parentProps && shouldLoad && (
             <Box
               {...parentProps}
-              className={`${maxHeight ? `UI-2ANI-BOX-maxHeight-${maxHeight}` : ""}  ${maxWidth ? `UI-2ANI-BOX-maxWidth-${maxWidth}` : ""} ${height ? `UI-2ANI-BOX-height-${height}` : ""} ${
-                width ? `UI-2ANI-BOX-width-${width}` : ""
-              } ${
+              className={`${
+                maxHeight ? `UI-2ANI-BOX-maxHeight-${maxHeight}` : ""
+              }  ${maxWidth ? `UI-2ANI-BOX-maxWidth-${maxWidth}` : ""} ${
+                height ? `UI-2ANI-BOX-height-${height}` : ""
+              } ${width ? `UI-2ANI-BOX-width-${width}` : ""} ${
                 borderRadius ? `UI-2ANI-BOX-borderRadius-${borderRadius}` : ""
               } ${parentProps?.className || ""} ${className || ""}`}
             >
               <img
-                className={`${maxHeightImg ? `UI-2ANI-BOX-maxHeight-${maxHeightImg}` : ""}  ${maxWidthImg ? `UI-2ANI-BOX-maxWidth-${maxWidthImg}` : ""} ${heightImg ? `UI-2ANI-BOX-height-${heightImg}` : ""} ${
+                className={`${
+                  maxHeightImg ? `UI-2ANI-BOX-maxHeight-${maxHeightImg}` : ""
+                }  ${
+                  maxWidthImg ? `UI-2ANI-BOX-maxWidth-${maxWidthImg}` : ""
+                } ${heightImg ? `UI-2ANI-BOX-height-${heightImg}` : ""} ${
                   widthImg ? `UI-2ANI-BOX-width-${widthImg}` : ""
                 }  ${styles.viewImage} ${
                   borderRadius ? `UI-2ANI-BOX-borderRadius-${borderRadius}` : ""
-                } ${isLoaded ? styles.loaded : ""} ${objectFit ? "UI-2ANI-BOX-objectFit-" + objectFit : ""} ${classImage || ""}`}
+                } ${isLoaded ? styles.loaded : ""} ${
+                  objectFit ? "UI-2ANI-BOX-objectFit-" + objectFit : ""
+                } ${classImage || ""}`}
                 src={error || src}
                 alt={alt || "Image Alt"}
                 style={{ display: isLoaded ? "block" : "none" }}

@@ -12,6 +12,7 @@
   outline: none;
   min-height: 24px;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .parent input:focus {

@@ -4,7 +4,7 @@ import { IconTypeProps } from "./arrayType";
 import useAniState from "../hooks/useAniState";
 
 const Icon = ({ type, size = 0, color = "", ...other }: IconTypeProps) => {
-  const {theme} = useAniState()
+  const { theme } = useAniState();
 
   return (
     <Fragment>
@@ -13,14 +13,10 @@ const Icon = ({ type, size = 0, color = "", ...other }: IconTypeProps) => {
           ...other,
           key: i,
           style: {
-            height: size ? `${size}px` : "1rem",
-            width: size ? `${size}px` : "1rem",
+            height: size ? size : "1rem",
+            width: size ? size : "1rem",
           },
-          fill: `${
-            color
-              ? color
-              : theme?.textColor || "#444444"
-          }`,
+          fill: `${color ? color : theme?.textColor || "#444444"}`,
         });
       })}
     </Fragment>

@@ -3,7 +3,9 @@ import Skeleton from "../Skeleton";
 import useAniState from "../../hooks/useAniState";
 import { TypeColorProps } from "../../type";
 import {
+  AnimateType,
   AnimationType,
+  BackgroundType,
   BorderRadiusType,
   BorderStyle,
   BorderWidth,
@@ -57,19 +59,7 @@ type JoinTypeProps = {
 
   maxHeight?: SizeMaxHType;
 
-  background?:
-    | "primary"
-    | "secondary"
-    | "info"
-    | "warning"
-    | "violet"
-    | "sunny"
-    | "pink"
-    | "default"
-    | "black"
-    | "white"
-    | "auto"
-    | "none";
+  background?: BackgroundType;
   backgroundHover?:
     | "primary"
     | "secondary"
@@ -131,7 +121,7 @@ type JoinTypeProps = {
   bottom?: PositionValue;
   right?: PositionValue;
   animations?: AnimationType[];
-  animation?: "fadeIn" | "slideIn" | "zoomIn" | "rotate" | "bounce" | "pulse";
+  animation?: AnimateType;
   overflow?: OverflowType;
   overflowY?: OverflowType;
   overflowX?: OverflowType;
@@ -245,6 +235,7 @@ const Box = ({
 
   const classInline = React.useMemo(() => {
     return [
+      "UI-2ANI-BOX-boxSizing",
       (state?.flex || flex ? `UI-2ANI-BOX-${state?.flex || flex}` : "") || "",
       `UI-2ANI-BOX-cursor-${state?.cursor || cursor}`,
       state?.align || align ? `UI-2ANI-BOX-align-${state?.align || align}` : "",
@@ -345,7 +336,9 @@ const Box = ({
         ? `UI-2ANI-BOX-objectFit-${state?.objectFit || objectFit}`
         : "",
       state?.backgroundSize || backgroundSize
-        ? `UI-2ANI-BOX-backgroundSize-${state?.backgroundSize || backgroundSize}`
+        ? `UI-2ANI-BOX-backgroundSize-${
+            state?.backgroundSize || backgroundSize
+          }`
         : "",
       state?.zIndex || zIndex
         ? `UI-2ANI-BOX-zIndex-${state?.zIndex || zIndex}`
@@ -357,7 +350,9 @@ const Box = ({
         ? `UI-2ANI-text-${state?.textColor || textColor}`
         : "",
       (state?.textHover || textHover) && (state?.textColor || textColor)
-        ? `UI-2ANI-text-${state?.textColor || textColor}${state?.textHover || textHover ? "-hover" : ""}`
+        ? `UI-2ANI-text-${state?.textColor || textColor}${
+            state?.textHover || textHover ? "-hover" : ""
+          }`
         : "",
       state?.noCopy || noCopy ? `UI-2ANI-css-no-copy` : "",
       state?.border || border ? `UI-2ANI-border` : "",
@@ -368,16 +363,22 @@ const Box = ({
         ? `UI-2ANI-border-style-${state?.borderStyle || borderStyle}`
         : "",
       state?.borderLeftWidth || borderLeftWidth
-        ? `UI-2ANI-border-left-width-${state?.borderLeftWidth || borderLeftWidth}`
+        ? `UI-2ANI-border-left-width-${
+            state?.borderLeftWidth || borderLeftWidth
+          }`
         : "",
       state?.borderRightWidth || borderRightWidth
-        ? `UI-2ANI-border-right-width-${state?.borderRightWidth || borderRightWidth}`
+        ? `UI-2ANI-border-right-width-${
+            state?.borderRightWidth || borderRightWidth
+          }`
         : "",
       state?.borderTopWidth || borderTopWidth
         ? `UI-2ANI-border-top-width-${state?.borderTopWidth || borderTopWidth}`
         : "",
       state?.borderBottomWidth || borderBottomWidth
-        ? `UI-2ANI-border-bottom-width-${state?.borderBottomWidth || borderBottomWidth}`
+        ? `UI-2ANI-border-bottom-width-${
+            state?.borderBottomWidth || borderBottomWidth
+          }`
         : "",
     ].join(" ");
   }, [
@@ -495,21 +496,37 @@ const Box = ({
           if (!animationCache[className]) {
             const animationKeyframes = `
                                         @keyframes ${className} {
-                                          from { ${cssObjectToString(animate.from)} }
-                                          to { ${cssObjectToString(animate.to)} }
+                                          from { ${cssObjectToString(
+                                            animate.from
+                                          )} }
+                                          to { ${cssObjectToString(
+                                            animate.to
+                                          )} }
                                         }
                                       `;
 
             const cssString = `
                                 .${className} {
                                   animation-name: ${className};
-                                  animation-duration: ${animate.duration || "1s"};
-                                  animation-timing-function: ${animate.timingFunction || "ease"};
+                                  animation-duration: ${
+                                    animate.duration || "1s"
+                                  };
+                                  animation-timing-function: ${
+                                    animate.timingFunction || "ease"
+                                  };
                                   animation-delay: ${animate.delay || "0s"};
-                                  animation-iteration-count: ${animate.iterationCount || "1"};
-                                  animation-direction: ${animate.direction || "normal"};
-                                  animation-fill-mode: ${animate.fillMode || "none"};
-                                  animation-play-state: ${animate.playState || "running"};
+                                  animation-iteration-count: ${
+                                    animate.iterationCount || "1"
+                                  };
+                                  animation-direction: ${
+                                    animate.direction || "normal"
+                                  };
+                                  animation-fill-mode: ${
+                                    animate.fillMode || "none"
+                                  };
+                                  animation-play-state: ${
+                                    animate.playState || "running"
+                                  };
                                 }
                               `;
 

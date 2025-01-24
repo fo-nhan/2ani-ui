@@ -1,68 +1,46 @@
-.container {
+.radioWrapper {
   display: inline-flex;
-  border-radius: 999px;
-  margin: 5px;
   align-items: center;
-  position: relative;
+  cursor: pointer;
+  margin-right: 16px;
 }
-.input {
+
+.radioInput {
+  position: absolute;
   opacity: 0;
-  position: absolute;
-  min-height: auto !important;
-  height: 100%;
-  z-index: 2;
   cursor: pointer;
 }
-.label {
-  border-radius: 9999px;
-  padding: 3px 15px 3px 40px;
-  cursor: pointer;
+
+.radioControl {
   position: relative;
-  transition: all 0.5s;
+  display: inline-block;
+  margin-right: 8px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  transition: all 0.3s ease;
 }
-.label::before,
-.label::after {
+
+.radioInput:checked + .radioControl {
+  border-color: var(--radio-color, #3498db);
+}
+
+.radioInput:checked + .radioControl::after {
   content: "";
-  border-radius: 9999px;
-  width: 16px;
-  height: 16px;
   position: absolute;
-  z-index: 1;
-}
-.label::before {
-  border: 2px solid #dcdcdc;
-  top: 4px;
-  left: 10px;
-  transition: all 0.5s;
-}
-.label::after {
-  top: 6px;
-  left: 12px;
-  transition: all 0.15s;
-  transition-timing-function: ease-out;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  background-color: var(--radio-color, #3498db);
 }
 
-.container:hover .hover {
-  background-color: #7156f823;
-}
-.label::before {
-  border: 2px solid #2196f3;
-}
-.input:checked ~ .label::after {
-  background-color: #ffffff;
-  top: 6px;
-  left: 12px;
-  transition: all 0.15s;
-  transition-timing-function: ease-out;
-}
-.input:checked ~ .label::before {
-  background-color: #2196f3;
-  border: 2px solid #2196f3;
+.radioLabel {
+  font-size: 16px;
+  color: #333;
 }
 
-.input:checked ~ .label::after {
-  width: 8px;
-  height: 8px;
-  top: 10px;
-  left: 16px;
+.radioInput:focus + .radioControl {
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
 }

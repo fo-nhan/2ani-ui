@@ -175,8 +175,12 @@ const Input = ({
   }, [focus, ref.current]);
 
   React.useEffect(() => {
-    setValue(value || defaultValue);
-  }, [value, defaultValue]);
+    setValue(defaultValue);
+  }, [defaultValue]);
+
+  React.useEffect(() => {
+    setValue(typeof value === "string" ? value : "");
+  }, [value]);
 
   return (
     <div

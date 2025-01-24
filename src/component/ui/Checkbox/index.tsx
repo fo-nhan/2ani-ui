@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 import styles from "./Checkbox.module.css";
 import { TypeColorProps } from "../../type";
 import { returnStyle } from "../../utils/style";
@@ -8,38 +8,65 @@ type TypeProps = {
   name?: string;
   children?: React.ReactNode;
   checked?: boolean;
-  onChange?: Function;
+  onChange?: (
+    checked: boolean,
+    value: any,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
   value?: any;
-  onClick?: Function;
+  onClick?: (
+    checked: boolean,
+    value: any,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
   disabled?: boolean;
 };
+
+type GroupContextType = {
+  values: any[];
+  onChange: (value: any, checked: boolean) => void;
+};
+
+const GroupContext = createContext<GroupContextType | null>(null);
 
 const Checkbox = ({
   type = "primary",
   name = "",
   children,
-  checked = false,
+  checked,
   onChange,
   onClick,
   value,
   disabled = false,
 }: TypeProps) => {
-  const [change, setChange] = React.useState(false);
+  const groupContext = useContext(GroupContext);
+  const [internalChecked, setInternalChecked] = React.useState(checked);
+
   React.useEffect(() => {
-    setChange(checked);
-    if (onChange) {
-      onChange(checked, value);
+    if (groupContext) {
+      setInternalChecked(groupContext.values.includes(value));
+    } else {
+      setInternalChecked(checked);
     }
-  }, [checked]);
-  const onHandleChange = (e: any) => {
-    setChange(!change);
+  }, [checked, groupContext, value]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newChecked = e.target.checked;
+    setInternalChecked(newChecked);
+
+    if (groupContext) {
+      groupContext.onChange(value, newChecked);
+    }
+
+    if (onChange) {
+      onChange(newChecked, value, e);
+    }
+
     if (onClick) {
-      onClick(!change, value, e);
-    }
-    if (onChange) {
-      onChange(!change, value, e);
+      onClick(newChecked, value, e);
     }
   };
+
   return (
     <div
       className={returnStyle(["container", disabled ? "disabled" : ""], styles)}
@@ -48,8 +75,8 @@ const Checkbox = ({
         name={name}
         className={returnStyle(["input"], styles)}
         type="checkbox"
-        checked={change}
-        onChange={onHandleChange}
+        checked={internalChecked}
+        onChange={handleChange}
         disabled={disabled}
         value={value}
       />
@@ -64,5 +91,32 @@ const Checkbox = ({
     </div>
   );
 };
+
+type GroupProps = {
+  children: React.ReactNode;
+  value?: any[];
+  onChange?: (values: any[]) => void;
+};
+
+const Group: React.FC<GroupProps> = ({
+  children,
+  value = [],
+  onChange = () => {},
+}) => {
+  const handleChange = (changedValue: any, checked: boolean) => {
+    const newValues = checked
+      ? [...value, changedValue]
+      : value.filter((v) => v !== changedValue);
+    onChange(newValues);
+  };
+
+  return (
+    <GroupContext.Provider value={{ values: value, onChange: handleChange }}>
+      {children}
+    </GroupContext.Provider>
+  );
+};
+
+Checkbox.Group = Group;
 
 export default Checkbox;

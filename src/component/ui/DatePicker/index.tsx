@@ -8,8 +8,8 @@ import Text from "../Text";
 
 export type DatePickerTypeProps = {
   selectedDate?: Date;
-  defaultDate?: Date;
-  onChange: (date: {
+  value?: Date;
+  onChange?: (date: {
     day: number;
     month: number;
     year: number;
@@ -46,11 +46,11 @@ export type DatePickerTypeProps = {
 };
 
 const DatePicker = ({
-  selectedDate = new Date(),
-  defaultDate,
-  onChange,
+  selectedDate,
+  value,
+  onChange = () => {},
   placeholder,
-  width = 200,
+  width = "100%",
 }: DatePickerTypeProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentDate, setCurrentDate] = useState<Date | undefined>(
@@ -68,15 +68,17 @@ const DatePicker = ({
       year: date.getFullYear(),
       week: Number(date.getDay()) + 1,
       date,
-      time: `${date.getFullYear()}/${date.getMonth() + 1 < 10 ? "0" : ""}${date.getMonth() + 1}/${
-        date.getDate() < 10 ? "0" : ""
-      }${date.getDate()}`,
+      time: `${date.getFullYear()}/${date.getMonth() + 1 < 10 ? "0" : ""}${
+        date.getMonth() + 1
+      }/${date.getDate() < 10 ? "0" : ""}${date.getDate()}`,
     };
   };
 
   const getTitle = (date: Date | undefined) => {
     if (!date) return "";
-    return `${date.getMonth() + 1 < 10 ? "0" : ""}${date.getMonth() + 1}/${date.getFullYear()}`;
+    return `${date.getMonth() + 1 < 10 ? "0" : ""}${
+      date.getMonth() + 1
+    }/${date.getFullYear()}`;
   };
 
   const daysInMonth = (month: number, year: number) => {
@@ -133,10 +135,10 @@ const DatePicker = ({
 
   // Đồng bộ currentDate với selectedDate mỗi khi selectedDate thay đổi
   useEffect(() => {
-    if (defaultDate && !currentDate) {
-      setCurrentDate(defaultDate);
+    if (value && !currentDate) {
+      setCurrentDate(value);
     }
-  }, [defaultDate && currentDate]);
+  }, [value && currentDate]);
 
   useEffect(() => {
     if (selectedDate) {
@@ -166,10 +168,15 @@ const DatePicker = ({
   };
 
   return (
-    <div className={styles.datePicker} ref={ref}>
+    <div
+      className={`${styles.datePicker} UI-2ANI-BOX-width-${width}`}
+      ref={ref}
+    >
       <input
         type="text"
-        className={`${styles.dateInput} UI-2ANI-BOX-width-${width} ${theme?.backgroundColorClass || ""}`}
+        className={`${styles.dateInput} UI-2ANI-BOX-width-${width} ${
+          theme?.backgroundColorClass || ""
+        }`}
         value={currentDate ? getTime(currentDate).time : ""}
         onChange={handleInputChange}
         placeholder={placeholder}

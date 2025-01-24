@@ -49,6 +49,7 @@ export { default as GroupAvatar } from "./ui/Avatar/GroupAvatar";
 export { default as ImageGallery } from "./ui/ImageGallery";
 export { default as Cropper } from "./ui/Cropper";
 export { default as FullView } from "./ui/FullView";
+export { default as Layout } from "./ui/Layout";
 
 // Icon
 export { default as Icon } from "./Icon/index";

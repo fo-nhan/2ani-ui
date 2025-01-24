@@ -1,43 +1,33 @@
-type RuleProps = {
-  message: string;
-  rule: any;
-  checked?: boolean;
-};
+import { ReactNode } from "react";
+import { BoxTypeProps } from "../Box";
 
-export type TypeFormRequieProps = {
-  message?: React.ReactNode | string;
-  regex?: RuleProps;
-  notNull?: boolean;
-  maxLength?: RuleProps;
-  minLength?: RuleProps;
-  maxNumber?: RuleProps;
-  minNumber?: RuleProps;
-  noMessage?: boolean;
-  function?: (args: any) => {
-    checked?: boolean
-    message?: string
-  }
-};
+export interface Rule {
+  required?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  pattern?: RegExp;
+  fsc?: (value: string | number | Date) => { error: boolean; message: string };
+  message?: string;
+}
 
-export type TypeFormProps = {
-  values?: {
-    [key: string | number]: any;
-  };
-  requires?: {
-    [key: string | number]: TypeFormRequieProps;
-  };
-  defaultConfig?: TypeFormProps
-};
+export interface UseFormReturn<T> {
+  getFieldsValue: () => Partial<T>;
+  setFieldsValue: (values: Partial<T>) => void;
+  resetFields: () => void;
+  validateFields: () => Promise<boolean>;
+  setFieldValue: (field: keyof T, value: any) => void;
+  errors: Record<string, string>;
+}
 
-export type TypeUseFormProps = {
-  setFieldValues: (values: { [key: string | number]: any }) => void;
-  setFieldValue: (name: string | number, value: any) => void;
-  setRequire: (name: string | number, value: any) => void;
-  form: TypeFormProps;
-  setForm: (arg?: TypeFormProps) => void;
-  reset: (arg?: TypeFormProps) => void;
-  ref: any
-  defaultConfig: TypeFormProps
-};
+export interface FormItemProps {
+  name: string;
+  label?: string;
+  children: ReactNode;
+  propsBox?: BoxTypeProps;
+}
 
-export default {};
+export interface FormProps {
+  form: any;
+  onFinish: (values: any) => void;
+  children: ReactNode;
+}

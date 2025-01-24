@@ -98,9 +98,9 @@ export default function Select({
 
   return (
     <div
-      className={`${styles.select} ${
-        disabled ? styles.disabled : ""
-      } ${theme.backgroundColorClass || ""} css-no-copy`}
+      className={`${styles.select} ${disabled ? styles.disabled : ""} ${
+        theme.backgroundColorClass || ""
+      } css-no-copy`}
       style={{
         width,
         minHeight: height,

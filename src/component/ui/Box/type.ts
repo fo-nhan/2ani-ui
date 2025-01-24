@@ -547,3 +547,25 @@ export type FlexType =
   | "flexDefault"
   | "flexEndCenter"
   | "flexStartCenter";
+
+export type AnimateType =
+  | "fadeIn"
+  | "slideIn"
+  | "zoomIn"
+  | "rotate"
+  | "bounce"
+  | "pulse";
+
+export type BackgroundType =
+  | "primary"
+  | "secondary"
+  | "info"
+  | "warning"
+  | "violet"
+  | "sunny"
+  | "pink"
+  | "default"
+  | "black"
+  | "white"
+  | "auto"
+  | "none";
